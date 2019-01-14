@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "paths": {
+        "assets": ["./app/assets/*"],
+        "routes": ["./app/routes/*"],
+        "constants": ["./app/constants"],
+        "components": ["./app/components/*"],
+        "containers": ["./app/containers/*"],
+        "store": ["./app/store/*"],
+        "actions": ["./app/store/actions/*"],
+        "actionTypes": ["./app/store/actionTypes/*"],
+        "reducers": ["./app/store/reducers/*"],
+        "services": ["./app/store/services/*"]
+      }
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}

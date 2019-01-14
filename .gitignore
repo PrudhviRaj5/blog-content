@@ -1,0 +1,29 @@
+ns template
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio
+
+*.iml
+
+## Directory-based project format:
+.idea/
+
+## File-based project format:
+*.ipr
+*.iws
+
+# NodeJS modules folder
+node_modules
+**/package-lock.json
+
+# npm debug log
+npm-debug.log
+
+# vs code
+.vscode
+
+# coverage
+/coverage
+
+# python
+__pycache__/
+.DS_Store
+

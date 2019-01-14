@@ -1,0 +1,49 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "airbnb"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true,
+    "es6": true
+  },
+  "rules": {
+    "react/forbid-prop-types": "off",
+    "camelcase":"off",
+    "space-before-function-paren": "off",
+    "import/prefer-default-export": "off",
+    "func-names": "off",
+    "arrow-body-style": "off",
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["assets", "./app/assets"],
+          ["routes", "./app/routes"],
+          ["constants", "./app/constants"],
+          ["components", "./app/components"],
+          ["containers", "./app/containers"],
+          ["store", "./app/store"],
+          ["actions", "./app/store/actions"],
+          ["actionTypes", "./app/store/actionTypes"],
+          ["reducers", "./app/store/reducers"],
+          ["services", "./app/store/services"]
+        ],
+        "extensions": [".ts", ".js", ".jsx", ".json"]
+      }
+    }
+  }
+}

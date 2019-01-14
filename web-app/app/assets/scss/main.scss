@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
+
+
+$bg_color_1: #e2e7ed;
+$bg_color_2: #f2f4f7;
+
+html {
+  font-family: "Roboto";
+}
+
+body {
+  margin: 0 auto;
+  background: $bg_color_2;
+}
+
+// :root {
+//   --mdc-theme-primary: #ef670d;    
+//   --mdc-theme-secondary: #f37623;
+// }

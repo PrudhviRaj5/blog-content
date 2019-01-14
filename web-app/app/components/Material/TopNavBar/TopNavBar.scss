@@ -1,0 +1,42 @@
+
+.zt-main__header.mdc-top-app-bar {
+  top: 0px;
+  background-color: #2e3c53;
+  z-index: 10;
+  height: 60px;
+
+  .zt-top-bar__left-section {
+    width: 15%;
+  }
+  .zt-top-bar__right-section{
+    width: 15%;
+  }
+  
+  .zt-top-bar__tab-section {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    .mdc-tab-bar {
+      height: 100%;
+    }
+    .mdc-tab-scroller {
+      height: 100%;
+    }
+    .mdc-tab-scroller__scroll-area {
+      height: 100%;
+    }
+    .mdc-tab-scroller__scroll-content {
+      height: 100%;
+      .mdc-tab {
+        height: 100%;
+        .mdc-tab__text-label {
+          color: white;
+        }
+      }
+      .mdc-tab--active {
+        .mdc-tab__text-label {
+          color: #ef670d;
+        }
+      }
+    }
+  }
+}
