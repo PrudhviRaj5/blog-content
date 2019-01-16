@@ -1,0 +1,19 @@
+.main__body {
+  .markdown-container {
+    p {
+      display: grid;
+      img {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right:auto;
+      }
+    }
+    pre {
+      white-space: pre-wrap; //css3
+      white-space: moz-pre-wrap; //firefox
+      white-space: -pre-wrap; //opera 4-6
+      white-space: -o-pre-wrap; //opera 7
+      word-wrap: break-word; //internet explorer
+    }
+  }
+}

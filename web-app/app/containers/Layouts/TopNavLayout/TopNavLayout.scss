@@ -1,19 +1,17 @@
 .main__frame {
   background-color: #eee;
-  width: 100%;
 }
 
 .main__body {
-  margin-top: 60px;
-  width: 100%;
+  margin-top: 64px;
   background-color: #ddd;
 }
 
 .top-nav-logo {
-  width: 160px;
+  // width: 100px;
   padding-top: 10px;
   img {
-    width: 100%;
+    width: auto;
     height: auto;
   }
 }

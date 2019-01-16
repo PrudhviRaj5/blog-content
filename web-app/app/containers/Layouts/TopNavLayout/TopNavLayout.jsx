@@ -7,17 +7,14 @@ import {
 } from 'react-router-dom';
 import {
   Drawer,
-  DrawerHeader,
+  // DrawerHeader,
   DrawerContent,
-  DrawerTitle,
-  DrawerSubtitle,
 } from '@rmwc/drawer';
 import {
   List,
   ListItem,
+  ListItemGraphic,
 } from '@rmwc/list';
-
-import { Button } from '@rmwc/button';
 
 import TopNavBar from 'components/Material/TopNavBar';
 import topNavRoutes from 'routes/topNavRoutes';
@@ -76,6 +73,13 @@ class TopNavLayout extends Component {
     }
   }
 
+  toggleDrawer = () => {
+    const {
+      drawerOpen,
+    } = this.state;
+    this.setState({ drawerOpen: !drawerOpen });
+  }
+
   render() {
     const {
       drawerOpen,
@@ -89,6 +93,7 @@ class TopNavLayout extends Component {
           leftLogo={ZyloLogo}
           centerLinks={topNavRoutes.centerLinks}
           updateActiveTab={this.updateActiveTab}
+          toggleDrawer={this.toggleDrawer}
         />
 
         <Drawer
@@ -96,19 +101,21 @@ class TopNavLayout extends Component {
           open={drawerOpen}
           onClose={() => this.setState({ drawerOpen: false })}
         >
-          <DrawerHeader>
-            <DrawerTitle>DrawerHeader</DrawerTitle>
-            <DrawerSubtitle>Subtitle</DrawerSubtitle>
-          </DrawerHeader>
+          {/* <DrawerHeader>
+            <ZyloLogo />
+          </DrawerHeader> */}
           <DrawerContent>
             <List>
               {
-                topNavRoutes.centerLinks.map(eachLink => (
+                topNavRoutes.centerLinks.map((eachLink, i) => (
                   <ListItem
                     key={eachLink.key}
                     tag={Link}
                     to={eachLink.path}
+                    activated={activeTab === i}
+                    onClick={() => this.updateActiveTab(i)}
                   >
+                    <ListItemGraphic icon="favorite" />
                     {eachLink.name}
                   </ListItem>
                 ))
@@ -118,12 +125,6 @@ class TopNavLayout extends Component {
         </Drawer>
 
         <div className="main__body">
-          <Button
-            onClick={() => this.setState({ drawerOpen: !drawerOpen })}
-            raised
-          >
-            Toggle Drawer
-          </Button>
           <Switch>
             {
               topNavRoutes.centerLinks.map(eachLink => (

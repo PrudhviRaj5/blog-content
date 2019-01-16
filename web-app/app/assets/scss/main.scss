@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
+@import 'custom_markdown';
 
 
 $bg_color_1: #e2e7ed;
@@ -17,5 +18,5 @@ body {
 
 :root {
   --mdc-theme-primary: #ffffff;    
-  --mdc-theme-secondary: #1edbf7;
+  --mdc-theme-secondary: #ffffff;
 }

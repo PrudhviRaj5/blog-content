@@ -5,6 +5,7 @@ import {
   TopAppBar,
   TopAppBarRow,
   TopAppBarSection,
+  TopAppBarNavigationIcon,
 } from '@rmwc/top-app-bar';
 import { TabBar, Tab } from '@rmwc/tabs';
 // import { Menu, MenuItem, MenuSurfaceAnchor } from '@rmwc/menu';
@@ -17,6 +18,7 @@ const TopNavBar = (props) => {
     centerLinks,
     activeTab,
     updateActiveTab,
+    toggleDrawer,
   } = props;
 
   const LeftLogo = leftLogo;
@@ -29,10 +31,22 @@ const TopNavBar = (props) => {
       <TopAppBarRow
         className="top-bar__small-screen"
       >
+        {/* <div>
+          <TopAppBarNavigationIcon
+            icon="menu"
+            onClick={toggleDrawer}
+          />
+          <LeftLogo />
+        </div> */}
         <TopAppBarSection
           alignStart
           className="top-bar__left-section"
-        />
+        >
+          <TopAppBarNavigationIcon
+            icon="menu"
+            onClick={toggleDrawer}
+          />
+        </TopAppBarSection>
 
         <TopAppBarSection
           className="top-bar__mid-section"
@@ -103,6 +117,7 @@ TopNavBar.propTypes = {
   centerLinks: PropTypes.arrayOf(Object).isRequired,
   activeTab: PropTypes.number.isRequired,
   updateActiveTab: PropTypes.func.isRequired,
+  toggleDrawer: PropTypes.func.isRequired,
 };
 
 export default TopNavBar;

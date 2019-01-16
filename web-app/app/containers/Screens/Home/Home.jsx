@@ -3,6 +3,8 @@ import { render } from 'react-dom';
 import ReactMarkdown from 'react-markdown';
 import axios from 'axios';
 
+import './Home.scss';
+
 
 class Home extends Component {
   state = {
@@ -28,8 +30,10 @@ class Home extends Component {
 
   render() {
     return (
-      <div id="md-container">
-        Home
+      <div className="home-page">
+        <div id="md-container" className="markdown-container">
+          Home
+        </div>
       </div>
     );
   }

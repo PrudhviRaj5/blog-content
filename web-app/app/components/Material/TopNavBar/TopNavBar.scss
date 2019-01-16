@@ -1,10 +1,32 @@
-$small_screen_break_point: 600px;
+$nav_color: #24282d;
+
+.main__frame {
+  .mdc-drawer {
+    background-color: $nav_color;
+
+    .mdc-list {
+      .mdc-list-item {
+        color: #9b9b9b;
+        i {
+          color: #9b9b9b;
+        }
+      }
+      .mdc-list-item--activated {
+        color: #fff;
+        i {
+          color: #fff;
+        }
+      }
+    }
+  }
+}
 
 .main__header.mdc-top-app-bar {
+  width: 100%;
+  max-width: 100%;
   top: 0px;
-  background-color: #24282d;
+  background-color: $nav_color;
   z-index: 10;
-  // height: 60px;
 
   // .top-bar__left-section {
   //   width: 20%;
@@ -19,6 +41,12 @@ $small_screen_break_point: 600px;
   //css for small screens
   .top-bar__small-screen {
     display: none;
+    .top-bar__left-section {
+      width: 10%;
+    }
+    .top-bar__right-section {
+      width: 10%;
+    }
 
     .top-nav-logo {
       margin-left: auto;
@@ -59,27 +87,38 @@ $small_screen_break_point: 600px;
       }
     }
   }
+}
 
-  // @media only screen and (max-width: $small_screen_break_point) {
-  //   .top-bar__large-screen {
-  //     display: none;
-  //   }
-  //   .top-bar__small-screen {
-  //     display: flex;
-  //   }
-  // }
-
-  @media only
-    /* Desktops and laptops ----------- */
-    screen  and (max-width : 700px),
-    /* Smartphones (portrait and landscape) ----------- */
-    screen and (min-device-width : 320px) and (max-device-width : 480px)
-    {
-      .top-bar__large-screen {
-        display: none;
-      }
-      .top-bar__small-screen {
-        display: flex;
-      }
+/* css for both resized desktops and mobiles */
+@media only
+/* Desktops and laptops ----------- */
+screen  and (max-width : 700px),
+/* Smartphones (portrait and landscape) ----------- */
+screen and (min-device-width : 320px) and (max-device-width : 480px)
+{
+  .main__header.mdc-top-app-bar {
+    .top-bar__large-screen {
+      display: none;
     }
+    .top-bar__small-screen {
+      display: flex;
+    }
+  }
+}
+
+/* css for only mobiles */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+  .main__frame {
+    .main__body {
+      margin-top: 56px;
+    }
+  }
+}
+// only for top-nav adjustment to body
+@media only screen and (min-device-width : 480px) and (max-device-width : 600px) {
+  .main__frame {
+    .main__body {
+      margin-top: 56px;
+    }
+  }
 }
