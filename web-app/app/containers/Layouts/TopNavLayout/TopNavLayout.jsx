@@ -1,5 +1,23 @@
 import React, { Component } from 'react';
-import { Switch, Route, withRouter } from 'react-router-dom';
+import {
+  Switch,
+  Route,
+  Link,
+  withRouter,
+} from 'react-router-dom';
+import {
+  Drawer,
+  DrawerHeader,
+  DrawerContent,
+  DrawerTitle,
+  DrawerSubtitle,
+} from '@rmwc/drawer';
+import {
+  List,
+  ListItem,
+} from '@rmwc/list';
+
+import { Button } from '@rmwc/button';
 
 import TopNavBar from 'components/Material/TopNavBar';
 import topNavRoutes from 'routes/topNavRoutes';
@@ -8,7 +26,7 @@ import './TopNavLayout.scss';
 const ZyloLogo = () => (
   <a
     href={topNavRoutes.leftLink.path}
-    className="zt-top-nav-logo"
+    className="top-nav-logo"
   >
     <img
       src={topNavRoutes.leftLink.logoImg}
@@ -21,8 +39,8 @@ class TopNavLayout extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      drawerOpen: false,
       activeTab: this.getLocIndex(props),
-      rightMenu: this.initRightMenuState(props),
     };
   }
 
@@ -36,37 +54,6 @@ class TopNavLayout extends Component {
     return idx;
   }
 
-  getLocRightMenu = ({ location }) => {
-    let idx = null;
-    let subIdx = null;
-    topNavRoutes.rightMenuLinks.forEach((link, i) => {
-      link.children.forEach((l, j) => {
-        if (location.pathname.includes(l.path)) {
-          idx = i;
-          subIdx = j;
-        }
-      });
-    });
-    return [idx, subIdx];
-  }
-
-  initRightMenuState = (props) => {
-    const state = {};
-    const [idx, subIdx] = this.getLocRightMenu(props);
-    topNavRoutes.rightMenuLinks.forEach((e, i) => {
-      state[i] = {
-        clicked: false,
-        selected: false,
-        childIdx: null,
-      };
-    });
-    if (idx !== null) {
-      state[idx].selected = true;
-      state[idx].childIdx = subIdx;
-    }
-    return state;
-  }
-
   slowUpdateActiveTab = () => {
     const self = this;
     setTimeout(() => {
@@ -76,7 +63,7 @@ class TopNavLayout extends Component {
           activeTab: aT,
         });
       }
-    }, 150);
+    }, 100);
   }
 
   updateActiveTab = (idx) => {
@@ -89,44 +76,54 @@ class TopNavLayout extends Component {
     }
   }
 
-  updateRightMenus = (idx, state) => {
-    const { rightMenu } = { ...this.state };
-    rightMenu[idx].clicked = state;
-    this.setState({
-      rightMenu,
-    });
-  }
-
-  onSelectRightMenu = (i, idx) => {
-    const { rightMenu } = { ...this.state };
-    rightMenu[i].selected = true;
-    rightMenu[i].childIdx = idx;
-    this.setState({
-      activeTab: null,
-      rightMenu,
-    });
-  }
-
   render() {
     const {
+      drawerOpen,
       activeTab,
-      rightMenu,
     } = this.state;
     return (
-      <div className="zt-main__frame">
+      <div className="main__frame">
 
         <TopNavBar
           activeTab={activeTab}
-          rightMenu={rightMenu}
           leftLogo={ZyloLogo}
           centerLinks={topNavRoutes.centerLinks}
-          rightMenuLinks={topNavRoutes.rightMenuLinks}
           updateActiveTab={this.updateActiveTab}
-          updateRightMenus={this.updateRightMenus}
-          onSelectRightMenu={this.onSelectRightMenu}
         />
 
-        <div className="zt-main__body">
+        <Drawer
+          modal
+          open={drawerOpen}
+          onClose={() => this.setState({ drawerOpen: false })}
+        >
+          <DrawerHeader>
+            <DrawerTitle>DrawerHeader</DrawerTitle>
+            <DrawerSubtitle>Subtitle</DrawerSubtitle>
+          </DrawerHeader>
+          <DrawerContent>
+            <List>
+              {
+                topNavRoutes.centerLinks.map(eachLink => (
+                  <ListItem
+                    key={eachLink.key}
+                    tag={Link}
+                    to={eachLink.path}
+                  >
+                    {eachLink.name}
+                  </ListItem>
+                ))
+              }
+            </List>
+          </DrawerContent>
+        </Drawer>
+
+        <div className="main__body">
+          <Button
+            onClick={() => this.setState({ drawerOpen: !drawerOpen })}
+            raised
+          >
+            Toggle Drawer
+          </Button>
           <Switch>
             {
               topNavRoutes.centerLinks.map(eachLink => (

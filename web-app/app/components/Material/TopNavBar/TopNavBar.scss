@@ -1,42 +1,85 @@
+$small_screen_break_point: 600px;
 
-.zt-main__header.mdc-top-app-bar {
+.main__header.mdc-top-app-bar {
   top: 0px;
-  background-color: #2e3c53;
+  background-color: #24282d;
   z-index: 10;
-  height: 60px;
+  // height: 60px;
 
-  .zt-top-bar__left-section {
-    width: 15%;
+  // .top-bar__left-section {
+  //   width: 20%;
+  // }
+  // .top-bar__right-section{
+  //   width: 20%;
+  // } 
+  // .top-bar__mid-section{
+  //   width: 100px;
+  // }
+
+  //css for small screens
+  .top-bar__small-screen {
+    display: none;
+
+    .top-nav-logo {
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
-  .zt-top-bar__right-section{
-    width: 15%;
-  }
-  
-  .zt-top-bar__tab-section {
-    padding-top: 0px;
-    padding-bottom: 0px;
-    .mdc-tab-bar {
-      height: 100%;
-    }
-    .mdc-tab-scroller {
-      height: 100%;
-    }
-    .mdc-tab-scroller__scroll-area {
-      height: 100%;
-    }
-    .mdc-tab-scroller__scroll-content {
-      height: 100%;
-      .mdc-tab {
+
+  // css for large screens
+  .top-bar__large-screen {
+    display: flex;
+    .top-bar__tab-section {
+      width: 400px;
+      padding-top: 0px;
+      padding-bottom: 0px;
+      .mdc-tab-bar {
         height: 100%;
-        .mdc-tab__text-label {
-          color: white;
-        }
       }
-      .mdc-tab--active {
-        .mdc-tab__text-label {
-          color: #ef670d;
+      .mdc-tab-scroller {
+        height: 100%;
+      }
+      .mdc-tab-scroller__scroll-area {
+        height: 100%;
+      }
+      .mdc-tab-scroller__scroll-content {
+        height: 100%;
+        .mdc-tab {
+          height: 100%;
+          text-transform: capitalize;
+          .mdc-tab__text-label {
+            color: white;
+          }
+        }
+        .mdc-tab--active {
+          .mdc-tab__text-label {
+            // color: #ef670d;
+          }
         }
       }
     }
   }
+
+  // @media only screen and (max-width: $small_screen_break_point) {
+  //   .top-bar__large-screen {
+  //     display: none;
+  //   }
+  //   .top-bar__small-screen {
+  //     display: flex;
+  //   }
+  // }
+
+  @media only
+    /* Desktops and laptops ----------- */
+    screen  and (max-width : 700px),
+    /* Smartphones (portrait and landscape) ----------- */
+    screen and (min-device-width : 320px) and (max-device-width : 480px)
+    {
+      .top-bar__large-screen {
+        display: none;
+      }
+      .top-bar__small-screen {
+        display: flex;
+      }
+    }
 }

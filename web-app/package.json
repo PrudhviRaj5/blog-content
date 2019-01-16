@@ -15,7 +15,10 @@
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
     "@babel/runtime": "^7.2.0",
+    "@rmwc/button": "^4.0.6",
+    "@rmwc/drawer": "^4.0.6",
     "@rmwc/elevation": "^4.0.6",
+    "@rmwc/list": "^4.0.6",
     "@rmwc/menu": "^4.0.6",
     "@rmwc/tabs": "^4.0.6",
     "@rmwc/top-app-bar": "^4.0.6",

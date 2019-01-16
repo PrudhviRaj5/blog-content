@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import { Button, ButtonIcon } from 'rmwc/Button';
+import { Button, ButtonIcon } from '@rmwc/button';
 
 import './ZtButton.scss';
 

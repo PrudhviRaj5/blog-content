@@ -5,10 +5,9 @@ import {
   TopAppBar,
   TopAppBarRow,
   TopAppBarSection,
-  TopAppBarActionItem,
 } from '@rmwc/top-app-bar';
 import { TabBar, Tab } from '@rmwc/tabs';
-import { Menu, MenuItem, MenuSurfaceAnchor } from '@rmwc/menu';
+// import { Menu, MenuItem, MenuSurfaceAnchor } from '@rmwc/menu';
 
 import './TopNavBar.scss';
 
@@ -18,10 +17,6 @@ const TopNavBar = (props) => {
     centerLinks,
     activeTab,
     updateActiveTab,
-    rightMenuLinks,
-    rightMenu,
-    updateRightMenus,
-    onSelectRightMenu,
   } = props;
 
   const LeftLogo = leftLogo;
@@ -29,18 +24,46 @@ const TopNavBar = (props) => {
   return (
     <TopAppBar
       fixed
-      className="zt-main__header"
+      className="main__header"
     >
-      <TopAppBarRow>
-
+      <TopAppBarRow
+        className="top-bar__small-screen"
+      >
         <TopAppBarSection
           alignStart
-          className="zt-top-bar__left-section"
+          className="top-bar__left-section"
+        />
+
+        <TopAppBarSection
+          className="top-bar__mid-section"
         >
           <LeftLogo />
         </TopAppBarSection>
 
-        <TopAppBarSection className="zt-top-bar__tab-section">
+        <TopAppBarSection
+          alignEnd
+          className="top-bar__right-section"
+        />
+      </TopAppBarRow>
+
+
+      {/* DOM for large screen */}
+      <TopAppBarRow
+        className="top-bar__large-screen"
+      >
+
+        <TopAppBarSection
+          alignStart
+          className="top-bar__left-section"
+        />
+
+        <TopAppBarSection
+          className="top-bar__mid-section"
+        >
+          <LeftLogo />
+        </TopAppBarSection>
+
+        <TopAppBarSection className="top-bar__tab-section">
           <TabBar
             activeTabIndex={activeTab}
             onActivate={(evt) => {
@@ -63,61 +86,12 @@ const TopNavBar = (props) => {
               ))
             }
           </TabBar>
-
         </TopAppBarSection>
 
         <TopAppBarSection
           alignEnd
-          className="zt-top-bar__right-section"
-        >
-          {
-            rightMenuLinks.map((e, i) => (
-              <TopAppBarActionItem
-                key={e.key}
-                aria-label={e.key}
-                alt={e.key}
-                // onMouseEnter={evt => props.updateRightMenus(i, true)}
-                onClick={() => updateRightMenus(i, true)}
-                onMouseLeave={() => updateRightMenus(i, false)}
-              >
-                {e.icon}
-                <MenuSurfaceAnchor>
-                  <Menu
-                    style={{ marginTop: '5px' }}
-                    open={rightMenu[i].clicked}
-                    onClose={() => updateRightMenus(i, false)}
-                    onSelect={(evt) => { onSelectRightMenu(i, evt.detail.index); }}
-                  >
-                    {
-                      e.children.map((x, j) => (
-                        <MenuItem
-                          key={x.key}
-                          tag={Link}
-                          to={x.path}
-                          selected={rightMenu[i].childIdx === j}
-                        >
-                          { x.name }
-                        </MenuItem>
-                      ))
-                    }
-                  </Menu>
-                </MenuSurfaceAnchor>
-              </TopAppBarActionItem>
-            ))
-          }
-        </TopAppBarSection>
-
-        {/*
-        <TopAppBarSection alignEnd>
-          <TopAppBarActionItem
-            aria-label="In-App Notifications"
-            alt="In-App Notifications"
-            onClick={evt => this.setState({'notificationIsOpen': !this.state.notificationIsOpen})}
-          >
-            notifications_active
-          </TopAppBarActionItem>
-        </TopAppBarSection>
-        */}
+          className="top-bar__right-section"
+        />
 
       </TopAppBarRow>
     </TopAppBar>
@@ -129,10 +103,6 @@ TopNavBar.propTypes = {
   centerLinks: PropTypes.arrayOf(Object).isRequired,
   activeTab: PropTypes.number.isRequired,
   updateActiveTab: PropTypes.func.isRequired,
-  rightMenuLinks: PropTypes.arrayOf(Object).isRequired,
-  rightMenu: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-  updateRightMenus: PropTypes.func.isRequired,
-  onSelectRightMenu: PropTypes.func.isRequired,
 };
 
 export default TopNavBar;
