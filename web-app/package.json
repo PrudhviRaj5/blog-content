@@ -1,6 +1,6 @@
 {
   "name": "prudhvi-blog-web-app",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Prudhvi Blog Web App",
   "main": "index.js",
   "scripts": {
@@ -16,6 +16,7 @@
     "@babel/polyfill": "^7.2.5",
     "@babel/runtime": "^7.2.0",
     "@rmwc/button": "^4.0.6",
+    "@rmwc/circular-progress": "^4.0.6",
     "@rmwc/drawer": "^4.0.6",
     "@rmwc/elevation": "^4.0.6",
     "@rmwc/list": "^4.0.6",
@@ -25,6 +26,7 @@
     "axios": "^0.18.0",
     "babel-preset-react-hmre": "^1.1.1",
     "classnames": "^2.2.6",
+    "highlight.js": "^9.13.1",
     "local-storage": "^1.4.2",
     "lodash": "^4.17.11",
     "material-components-web": "^0.43.0",

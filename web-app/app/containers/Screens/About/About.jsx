@@ -5,7 +5,7 @@ class About extends Component {
 
   render() {
     return (
-      <div>
+      <div className="content-center-page">
         About
       </div>
     );

@@ -1,0 +1,9 @@
+.mdc-button.custom-button.m-bt {
+  text-transform: none;
+  background-color: gray;
+  // color: #000;
+
+  &.round-button {
+    border-radius: 18px;
+  }
+}

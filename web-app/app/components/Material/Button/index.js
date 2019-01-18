@@ -1,3 +1,3 @@
-import ZtButton from './ZtButton';
+import CustomButton from './CustomButton';
 
-export default ZtButton;
+export default CustomButton;

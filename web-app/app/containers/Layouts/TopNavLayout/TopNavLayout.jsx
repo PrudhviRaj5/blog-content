@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   Switch,
   Route,
@@ -7,7 +8,6 @@ import {
 } from 'react-router-dom';
 import {
   Drawer,
-  // DrawerHeader,
   DrawerContent,
 } from '@rmwc/drawer';
 import {
@@ -39,6 +39,14 @@ class TopNavLayout extends Component {
       drawerOpen: false,
       activeTab: this.getLocIndex(props),
     };
+  }
+
+  componentDidMount() {
+    const { activeTab } = this.state;
+    const { history } = this.props;
+    if (activeTab === null) {
+      history.push('/home');
+    }
   }
 
   getLocIndex = ({ location }) => {
@@ -101,9 +109,6 @@ class TopNavLayout extends Component {
           open={drawerOpen}
           onClose={() => this.setState({ drawerOpen: false })}
         >
-          {/* <DrawerHeader>
-            <ZyloLogo />
-          </DrawerHeader> */}
           <DrawerContent>
             <List>
               {
@@ -143,5 +148,9 @@ class TopNavLayout extends Component {
     );
   }
 }
+
+TopNavLayout.propTypes = {
+  history: PropTypes.any.isRequired,
+};
 
 export default withRouter(TopNavLayout);

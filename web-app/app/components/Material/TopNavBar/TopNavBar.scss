@@ -28,16 +28,6 @@ $nav_color: #24282d;
   background-color: $nav_color;
   z-index: 10;
 
-  // .top-bar__left-section {
-  //   width: 20%;
-  // }
-  // .top-bar__right-section{
-  //   width: 20%;
-  // } 
-  // .top-bar__mid-section{
-  //   width: 100px;
-  // }
-
   //css for small screens
   .top-bar__small-screen {
     display: none;
@@ -92,9 +82,9 @@ $nav_color: #24282d;
 /* css for both resized desktops and mobiles */
 @media only
 /* Desktops and laptops ----------- */
-screen  and (max-width : 700px),
+screen and (max-width : 700px),
 /* Smartphones (portrait and landscape) ----------- */
-screen and (min-device-width : 320px) and (max-device-width : 480px)
+screen and (max-device-width : 480px)
 {
   .main__header.mdc-top-app-bar {
     .top-bar__large-screen {
@@ -104,21 +94,18 @@ screen and (min-device-width : 320px) and (max-device-width : 480px)
       display: flex;
     }
   }
-}
-
-/* css for only mobiles */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
   .main__frame {
     .main__body {
       margin-top: 56px;
     }
   }
 }
-// only for top-nav adjustment to body
-@media only screen and (min-device-width : 480px) and (max-device-width : 600px) {
+
+// // only for top-nav adjustment to body
+@media only screen and (min-device-width : 600px) and (max-device-width : 700px) {
   .main__frame {
     .main__body {
-      margin-top: 56px;
+      margin-top: 64px;
     }
   }
 }

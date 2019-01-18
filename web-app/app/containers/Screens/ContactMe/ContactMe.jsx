@@ -5,7 +5,7 @@ class ContactMe extends Component {
 
   render() {
     return (
-      <div>
+      <div className="content-center-page">
         Contact Me
       </div>
     );

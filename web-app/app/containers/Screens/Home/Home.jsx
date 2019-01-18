@@ -1,42 +1,30 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
-import ReactMarkdown from 'react-markdown';
-import axios from 'axios';
+import React from 'react';
+import {
+  Route,
+  Switch,
+  withRouter,
+} from 'react-router-dom';
+
+import homeRoutes from 'routes/homeRoutes';
 
 import './Home.scss';
 
 
-class Home extends Component {
-  state = {
-    // data: null,
-  }
+const Home = () => {
+  return (
+    <Switch>
+      {
+        homeRoutes.map(e => (
+          <Route
+            path={`/home${e.path}`}
+            key={e.key}
+            component={e.component}
+            exact={e.exact}
+          />
+        ))
+      }
+    </Switch>
+  );
+};
 
-  componentDidMount() {
-    axios({
-      method: 'GET',
-      url: 'https://raw.githubusercontent.com/wiki/PrudhviRaj5/blog-content/Home.md',
-    })
-      .then((response) => {
-        console.log('data', response.data);
-        render(
-          <ReactMarkdown source={response.data} />,
-          document.getElementById('md-container'),
-        );
-      })
-      .catch((e) => {
-        console.log('Error', e);
-      });
-  }
-
-  render() {
-    return (
-      <div className="home-page">
-        <div id="md-container" className="markdown-container">
-          Home
-        </div>
-      </div>
-    );
-  }
-}
-
-export default Home;
+export default withRouter(Home);

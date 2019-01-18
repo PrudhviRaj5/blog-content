@@ -31,13 +31,6 @@ const TopNavBar = (props) => {
       <TopAppBarRow
         className="top-bar__small-screen"
       >
-        {/* <div>
-          <TopAppBarNavigationIcon
-            icon="menu"
-            onClick={toggleDrawer}
-          />
-          <LeftLogo />
-        </div> */}
         <TopAppBarSection
           alignStart
           className="top-bar__left-section"
@@ -112,10 +105,14 @@ const TopNavBar = (props) => {
   );
 };
 
+TopNavBar.defaultProps = {
+  activeTab: null,
+};
+
 TopNavBar.propTypes = {
   leftLogo: PropTypes.func.isRequired,
   centerLinks: PropTypes.arrayOf(Object).isRequired,
-  activeTab: PropTypes.number.isRequired,
+  activeTab: PropTypes.number,
   updateActiveTab: PropTypes.func.isRequired,
   toggleDrawer: PropTypes.func.isRequired,
 };

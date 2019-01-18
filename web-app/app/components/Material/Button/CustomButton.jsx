@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Button, ButtonIcon } from '@rmwc/button';
 
-import './ZtButton.scss';
+import './CustomButton.scss';
 
-const ZtButton = (props) => {
+const CustomButton = (props) => {
   const {
     icon,
     rounded,
@@ -14,14 +15,15 @@ const ZtButton = (props) => {
   } = props;
 
   const clName = {
-    'zt-button': true,
+    'custom-button': true,
+    'm-bt': true,
   };
 
   if (className) {
     clName[className] = true;
   }
   if (rounded) {
-    clName['zt-round-button'] = true;
+    clName['round-button'] = true;
   }
 
   return (
@@ -38,4 +40,18 @@ const ZtButton = (props) => {
   );
 };
 
-export default ZtButton;
+CustomButton.defaultProps = {
+  icon: null,
+  rounded: false,
+  className: '',
+  children: null,
+};
+
+CustomButton.propTypes = {
+  icon: PropTypes.string,
+  rounded: PropTypes.bool,
+  className: PropTypes.string,
+  children: PropTypes.any,
+};
+
+export default CustomButton;

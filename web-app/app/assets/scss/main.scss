@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
 @import 'custom_markdown';
+@import 'content_center_page';
 
 
 $bg_color_1: #e2e7ed;
@@ -17,6 +18,6 @@ body {
 }
 
 :root {
-  --mdc-theme-primary: #ffffff;    
-  --mdc-theme-secondary: #ffffff;
+  --mdc-theme-primary: #ffffff;
+  // --mdc-theme-secondary: #ffffff;
 }
