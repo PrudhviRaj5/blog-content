@@ -27,6 +27,7 @@
     "babel-preset-react-hmre": "^1.1.1",
     "classnames": "^2.2.6",
     "highlight.js": "^9.13.1",
+    "kleur": "^3.0.1",
     "local-storage": "^1.4.2",
     "lodash": "^4.17.11",
     "material-components-web": "^0.43.0",

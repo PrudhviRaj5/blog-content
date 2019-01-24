@@ -1,0 +1,53 @@
+.blog-page {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+
+  .nav-big-blog-lists {
+    display: block;
+  }
+}
+
+.nav-small-blog-lists {
+  display: none;
+  height: 50px;
+  position: fixed;
+  top: calc(100% - 50px);
+  color: white;
+  background-color: black;
+}
+
+@media only
+/* Desktops and laptops ----------- */
+screen  and (min-width : 900px) and (max-width : 1200px)
+{
+  .blog-page {
+    grid-template-columns: 5fr 2fr;
+  }
+}
+
+@media only
+/* Desktops and laptops ----------- */
+screen  and (min-width : 700px) and (max-width : 900px)
+{
+  .blog-page {
+    grid-template-columns: 9fr 5fr;
+  }
+}
+
+@media only
+/* Desktops and laptops ----------- */
+screen  and (max-width : 700px),
+/* Smartphones (portrait and landscape) ----------- */
+screen and (max-device-width : 480px)
+{
+  .blog-page {
+    grid-template-columns: auto;
+
+    .nav-big-blog-lists {
+      display: none;
+    }
+  }
+  .nav-small-blog-lists {
+    display: block;
+  }
+}
