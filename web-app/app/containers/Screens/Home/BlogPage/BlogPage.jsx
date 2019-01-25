@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { render } from 'react-dom';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { Scrollbars } from 'react-custom-scrollbars';
 import ReactMarkdown from 'react-markdown';
 import htmlParser from 'react-markdown/plugins/html-parser';
 import { connect } from 'react-redux';
@@ -114,8 +115,16 @@ class BlogPage extends Component {
         </ListItem>
       ))
     );
+    const Comp1 = () => (
+      <React.Fragment>
+        <Comp />
+        {
+          Array(20).fill().map(() => <ListItem>Test</ListItem>)
+        }
+      </React.Fragment>
+    );
     setTimeout(() => {
-      render(<Comp />, document.getElementById(self.outlineListId));
+      render(<Comp1 />, document.getElementById(self.outlineListId));
     }, 200);
   }
 
@@ -159,22 +168,34 @@ class BlogPage extends Component {
             }
           </div>
           <nav className="nav-big-outline">
-            <List
-              id={self.outlineListId}
+            <Scrollbars
+              autoHide
+              autoHideTimeout={1000}
+              autoHideDuration={200}
             >
-              {
-                (() => {
-                  self.renderOutline();
-                })()
-              }
-            </List>
+              <List
+                id={self.outlineListId}
+              >
+                {
+                  (() => {
+                    self.renderOutline();
+                  })()
+                }
+              </List>
+            </Scrollbars>
           </nav>
           <nav className="nav-big-blog-lists">
-            <List>
-              <ListItem>Cookies</ListItem>
-              <ListItem>Pizza</ListItem>
-              <ListItem>Icecream</ListItem>
-            </List>
+            <Scrollbars
+              autoHide
+              autoHideTimeout={1000}
+              autoHideDuration={200}
+            >
+              <List>
+                {
+                  Array(10).fill().map(() => <ListItem>Some Test Article Item</ListItem>)
+                }
+              </List>
+            </Scrollbars>
           </nav>
         </div>
         <nav className="nav-small-blog-lists">

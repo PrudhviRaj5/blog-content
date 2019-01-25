@@ -1,24 +1,29 @@
 .blog-page {
   display: grid;
   position: relative;
-  grid-template-columns: 20% 60% 20%;
+  grid-template-columns: 5% 80% 15%;
   grid-template-areas: "outln main links";
 
   .markdown-container {
     grid-area: main;
+    padding: 20px;
+    background-color: white;
   }
   .nav-big-outline {
     display: block;
     grid-area: outln;
     position: fixed;
+    height: 100%;
+    left: 0;
     width: calc(0.2*0.64*100%);
   }
   .nav-big-blog-lists {
     display: block;
     grid-area: links;
     position: fixed;
-    left: calc(18% + (0.8*0.64*100%));
-    width: calc(0.2*0.64*100%);
+    height: 100%;
+    left: calc(18% + (0.87*0.64*100%));
+    width: calc(0.3*0.64*100%);
   }
 }
 
@@ -36,13 +41,13 @@
 screen  and (min-width : 1300px) and (max-width : 1500px)
 {
   .blog-page {
-    grid-template-columns: 22% 56% 22%;
+    grid-template-columns: 8% 75% 17%;
     .nav-big-outline {
-      width: calc(0.22*0.7*100%);
+      width: calc(0.25*0.7*100%);
     }
     .nav-big-blog-lists {
-      left: calc(15% + (0.78*0.7*100%));
-      width: calc(0.22*0.7*100%);
+      left: calc(15% + (0.85*0.7*100%));
+      width: calc(0.3*0.7*100%);
     }
   }
 }
@@ -52,13 +57,13 @@ screen  and (min-width : 1300px) and (max-width : 1500px)
 screen  and (min-width : 1000px) and (max-width : 1300px)
 {
   .blog-page {
-    grid-template-columns: 24% 52% 24%;
+    grid-template-columns: 10% 70% 15%;
     .nav-big-outline {
       width: calc(0.24*0.76*100%);
     }
     .nav-big-blog-lists {
-      left: calc(12% + (0.76*0.76*100%));
-      width: calc(0.24*0.76*100%);
+      left: calc(12% + (0.82*0.76*100%));
+      width: calc(0.25*0.76*100%);
     }
   }
 }
@@ -68,12 +73,12 @@ screen  and (min-width : 1000px) and (max-width : 1300px)
 screen  and (min-width : 700px) and (max-width : 1000px)
 {
   .blog-page {
-    grid-template-columns: 26% 48% 26%;
+    grid-template-columns: 15% 65% 20%;
     .nav-big-outline {
-      width: calc(0.26*0.84*100%);
+      width: calc(0.23*0.84*100%);
     }
     .nav-big-blog-lists {
-      left: calc(8% + (0.74*0.84*100%));
+      left: calc(8% + (0.82*0.84*100%));
       width: calc(0.26*0.84*100%);
     }
   }
