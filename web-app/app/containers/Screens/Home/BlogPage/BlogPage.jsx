@@ -36,9 +36,9 @@ class BlogPage extends Component {
     return Array(len).fill().map(() => React.createRef());
   }
 
-  state = {
-    bool: false,
-  }
+  // state = {
+  //   bool: false,
+  // }
 
   outlineListId = 'blog-outline'
 
@@ -95,15 +95,18 @@ class BlogPage extends Component {
     }
   }
 
+  generateKey = (str, i) => `${str}-${i}`
+
   renderOutline = () => {
     const self = this;
     const Comp = () => (
       self.headingEls.map((el, i) => (
         <ListItem
+          key={self.generateKey('otline-key', i)}
           onClick={() => {
             window.scrollTo(
               0,
-              self.allRefsArr[i].current.offsetTop - 64,
+              self.allRefsArr[i].current.offsetTop,
             );
           }}
         >
@@ -154,24 +157,23 @@ class BlogPage extends Component {
                 ) : null;
               })()
             }
-            <ListItem
-              onClick={() => { const { bool } = this.state; self.setState({ bool: !bool }); }}
-            >
-                HHHHHHHHHHHHHHHHHHHHHHHHHHHHH
-            </ListItem>
           </div>
-          <nav className="nav-big-blog-lists">
+          <nav className="nav-big-outline">
             <List
               id={self.outlineListId}
             >
-              <ListItem>Cookies</ListItem>
-              <ListItem>Pizza</ListItem>
-              <ListItem>Icecream</ListItem>
               {
                 (() => {
                   self.renderOutline();
                 })()
               }
+            </List>
+          </nav>
+          <nav className="nav-big-blog-lists">
+            <List>
+              <ListItem>Cookies</ListItem>
+              <ListItem>Pizza</ListItem>
+              <ListItem>Icecream</ListItem>
             </List>
           </nav>
         </div>

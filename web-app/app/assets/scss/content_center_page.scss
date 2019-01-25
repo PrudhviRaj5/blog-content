@@ -7,12 +7,34 @@
 
   @media only
   /* Desktops and laptops ----------- */
-  screen  and (min-width : 700px) and (max-width : 1200px)
+  screen  and (min-width : 1300px) and (max-width : 1500px)
+  {
+    .content-center-page {
+      margin-left: 15%;
+      margin-right: 15%;
+      width: 70%;
+    }
+  }
+
+  @media only
+  /* Desktops and laptops ----------- */
+  screen  and (min-width : 1000px) and (max-width : 1300px)
   {
     .content-center-page {
       margin-left: 12%;
       margin-right: 12%;
       width: 76%;
+    }
+  }
+
+  @media only
+  /* Desktops and laptops ----------- */
+  screen  and (min-width : 700px) and (max-width : 1000px)
+  {
+    .content-center-page {
+      margin-left: 8%;
+      margin-right: 8%;
+      width: 84%;
     }
   }
 

@@ -1,9 +1,24 @@
 .blog-page {
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  position: relative;
+  grid-template-columns: 20% 60% 20%;
+  grid-template-areas: "outln main links";
 
+  .markdown-container {
+    grid-area: main;
+  }
+  .nav-big-outline {
+    display: block;
+    grid-area: outln;
+    position: fixed;
+    width: calc(0.2*0.64*100%);
+  }
   .nav-big-blog-lists {
     display: block;
+    grid-area: links;
+    position: fixed;
+    left: calc(18% + (0.8*0.64*100%));
+    width: calc(0.2*0.64*100%);
   }
 }
 
@@ -18,19 +33,49 @@
 
 @media only
 /* Desktops and laptops ----------- */
-screen  and (min-width : 900px) and (max-width : 1200px)
+screen  and (min-width : 1300px) and (max-width : 1500px)
 {
   .blog-page {
-    grid-template-columns: 5fr 2fr;
+    grid-template-columns: 22% 56% 22%;
+    .nav-big-outline {
+      width: calc(0.22*0.7*100%);
+    }
+    .nav-big-blog-lists {
+      left: calc(15% + (0.78*0.7*100%));
+      width: calc(0.22*0.7*100%);
+    }
   }
 }
 
 @media only
 /* Desktops and laptops ----------- */
-screen  and (min-width : 700px) and (max-width : 900px)
+screen  and (min-width : 1000px) and (max-width : 1300px)
 {
   .blog-page {
-    grid-template-columns: 9fr 5fr;
+    grid-template-columns: 24% 52% 24%;
+    .nav-big-outline {
+      width: calc(0.24*0.76*100%);
+    }
+    .nav-big-blog-lists {
+      left: calc(12% + (0.76*0.76*100%));
+      width: calc(0.24*0.76*100%);
+    }
+  }
+}
+
+@media only
+/* Desktops and laptops ----------- */
+screen  and (min-width : 700px) and (max-width : 1000px)
+{
+  .blog-page {
+    grid-template-columns: 26% 48% 26%;
+    .nav-big-outline {
+      width: calc(0.26*0.84*100%);
+    }
+    .nav-big-blog-lists {
+      left: calc(8% + (0.74*0.84*100%));
+      width: calc(0.26*0.84*100%);
+    }
   }
 }
 
@@ -43,9 +88,10 @@ screen and (max-device-width : 480px)
   .blog-page {
     grid-template-columns: auto;
 
-    .nav-big-blog-lists {
+    .nav-big-outline, .nav-big-blog-lists {
       display: none;
     }
+    
   }
   .nav-small-blog-lists {
     display: block;
