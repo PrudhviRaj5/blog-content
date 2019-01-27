@@ -1,26 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import axios from 'axios';
+import { connect } from 'react-redux';
 
 import Button from 'components/Material/Button';
 
-class BlogsList extends Component {
-  state = {
-    data: null,
-  }
+import { fetchBlogsList } from 'actions/Home/BlogsList/BlogsList.ax';
 
+
+class BlogsList extends Component {
   componentDidMount() {
-    axios({
-      method: 'GET',
-      url: 'https://raw.githubusercontent.com/PrudhviRaj5/my-awesome-blog/master/blog-content/all_blog_urls.json',
-    })
-      .then((response) => {
-        this.setState({ data: response.data });
-      })
-      .catch((e) => {
-        console.log('Error', e);
-      });
+    const { fetchData } = this.props;
+    fetchData();
   }
 
   goToBlogPage = () => {
@@ -29,13 +20,14 @@ class BlogsList extends Component {
   }
 
   render() {
-    const { data } = this.state;
+    const { data, fetching } = this.props;
+    console.log('data', data);
 
     return (
       <div className="content-center-page">
         <div>
           {
-            data ? (
+            !fetching ? (
               JSON.stringify(data)
             ) : null
           }
@@ -52,8 +44,25 @@ class BlogsList extends Component {
   }
 }
 
+
 BlogsList.propTypes = {
   history: PropTypes.any.isRequired,
+  data: PropTypes.any.isRequired,
+  fetchData: PropTypes.func.isRequired,
+  fetching: PropTypes.bool.isRequired,
 };
 
-export default withRouter(BlogsList);
+const mapStateToProps = (state) => {
+  return {
+    data: state.Home_BlogsList.data,
+    fetching: state.Home_BlogsList.fetching,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchData: () => dispatch(fetchBlogsList()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(BlogsList));
