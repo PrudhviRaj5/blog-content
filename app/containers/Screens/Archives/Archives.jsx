@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import {
   Accordion,
   AccordionItem,
@@ -11,43 +10,13 @@ import {
   fetchError,
 } from 'actions/common.ax';
 
-// Demo styles, see 'Styles' section below for some notes on use.
 import 'react-accessible-accordion/dist/fancy-example.css';
 import './Archives.scss';
-import '../Home/BlogPage/BlogPage.scss';
 
 const monthNames = [
   'January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December',
 ];
-
-const DateFormatter = (props) => {
-  const { datePublished } = props;
-  const date = `${monthNames[(new Date(datePublished)).getMonth()]} ${new Date(datePublished).getUTCFullYear()}`;
-  return (
-    <React.Fragment>
-      {date}
-    </React.Fragment>
-  );
-};
-
-const DatePublished = (props) => {
-  const { datePublished } = props;
-  const date = `${new Date(datePublished).getDate()} : `;
-  return (
-    <React.Fragment>
-      {date}
-    </React.Fragment>
-  );
-};
-
-DateFormatter.propTypes = {
-  datePublished: PropTypes.string.isRequired,
-};
-DatePublished.propTypes = {
-  datePublished: PropTypes.string.isRequired,
-};
-
 class Archives extends Component {
   constructor(props) {
     super(props);
@@ -60,7 +29,7 @@ class Archives extends Component {
     this.getUserData();
   }
 
-  getUserData(dispatch) {
+  getUserData = (dispatch) => {
     axios({
       method: 'GET',
       url: 'http://localhost:5500/blog-content/all_blog_urls.json',
@@ -73,33 +42,76 @@ class Archives extends Component {
       });
   }
 
+  getMonthYear = datePublished => (
+    `${monthNames[(new Date(datePublished)).getMonth()]} ${new Date(datePublished).getUTCFullYear()}`
+  )
+
+  getDate = datePublished => (
+    `${new Date(datePublished).getDate()}`
+  )
+
+  getFilterData = (data) => {
+    const filterMap = {};
+    const sortHelper = [];
+    const filterData = [];
+    data.forEach((x) => {
+      const monthYear = this.getMonthYear(x.date_published);
+      const newData = {
+        name: x.name,
+        date: this.getDate(x.date_published),
+        url: x.url,
+      };
+      if (monthYear in filterMap) {
+        filterMap[monthYear].push(newData);
+      } else {
+        filterMap[monthYear] = [newData];
+        sortHelper.push(monthYear);
+      }
+    });
+    sortHelper.forEach((z) => {
+      filterData.push({
+        datePublished: z,
+        dateWiseData: filterMap[z],
+      });
+    });
+    return filterData;
+  }
+
   render() {
     const { userData } = this.state;
+    const filterData = this.getFilterData(userData);
 
     return (
       <div className="content-center-page blog-page">
         <div className="markdown-container">
           <Accordion accordion={false}>
             {
-              userData.map(x => (
+              filterData.map(x => (
                 <AccordionItem
                   key={x.name}
                 >
                   <AccordionItemTitle>
                     <h3 className="u-position-relative">
-                      <DateFormatter datePublished={x.date_published} />
+                      <div className="accordion__arrow" role="presentation" />
+                      {x.datePublished}
                     </h3>
                   </AccordionItemTitle>
                   <AccordionItemBody>
-                    <DatePublished datePublished={x.date_published} />
-                    <a
-                      className="accordionLink"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href={`${x.url}`}
-                    >
-                      {x.content}
-                    </a>
+                    {
+                      x.dateWiseData.map(y => (
+                        <div>
+                          {`${y.date}: `}
+                          <a
+                            className="accordionLink"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href={`${y.url}`}
+                          >
+                            {y.name}
+                          </a>
+                        </div>
+                      ))
+                    }
                   </AccordionItemBody>
                 </AccordionItem>
               ))
