@@ -1,0 +1,25 @@
+.accordion {
+  border: none;
+  border-radius: 0;
+  a.accordionLink {
+    text-decoration: none;
+    color: #e67627;
+  }
+}
+
+.accordion__title {
+  background-color: transparent;
+  padding: 5px;
+  &:hover {
+    background-color: transparent;
+    outline: 0;
+  }
+}
+
+.accordion__item + .accordion__item {
+  border-top: none;
+}
+
+.accordion__body {
+  padding: 5px 38px;
+}
