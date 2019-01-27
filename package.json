@@ -19,6 +19,7 @@
     "@rmwc/circular-progress": "^4.0.6",
     "@rmwc/drawer": "^4.0.6",
     "@rmwc/elevation": "^4.0.6",
+    "@rmwc/icon": "^4.0.6",
     "@rmwc/list": "^4.0.6",
     "@rmwc/menu": "^4.0.6",
     "@rmwc/tabs": "^4.0.6",

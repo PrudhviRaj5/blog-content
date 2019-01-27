@@ -21,7 +21,6 @@ class BlogsList extends Component {
 
   render() {
     const { data, fetching } = this.props;
-    console.log('data', data);
 
     return (
       <div className="content-center-page">

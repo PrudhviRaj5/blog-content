@@ -16,19 +16,95 @@
     height: 100%;
     left: 0;
     width: calc(0.2*0.64*100%);
+
+    .show-outline {
+      position: absolute;
+      top: 40%;
+      left: -10px;
+      background-color: #24282d;
+      border-top-right-radius: 18px;
+      border-bottom-right-radius: 18px;
+    }
+
+    .mdc-drawer {
+      // background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .mdc-list {
+      margin-bottom: 70px;
+
+      .outline-list-item {
+        cursor: pointer;
+        height: 100%;
+        min-height: 40px;
+      }
+      .item-level-1 {
+        font-size: 18px;
+        font-weight: 800;
+      }
+      .item-level-2 {
+        padding-left: 30px;
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .item-level-3 {
+        padding-left: 45px;
+        font-size: 14px;
+        font-weight: 500;
+      }
+    }
+
+    .nav-big-outline__heading {
+      height: 60px;
+      border-top: 0.5px solid black;
+      border-bottom: 0.5px solid black;
+      // box-shadow: 0px 10px 2px 2px white;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 7fr 3fr;
+      .nav-big-outline__heading-text {
+        align-self: center;
+        font-size: 18px;
+        color: rgb(185, 185, 185);
+        span {
+          padding-left: 15px;
+        }
+      }
+      .nav-big-outline__heading-icon {
+        align-self: center;
+        text-align: center;
+        color: rgb(155, 155, 155);
+        i {
+          cursor: pointer;
+        }
+      }
+    }
   }
-  .nav-big-blog-lists {
+  .nav-big-blog-recent {
     display: block;
     grid-area: links;
     position: fixed;
     height: 100%;
     left: calc(18% + (0.87*0.64*100%));
     width: calc(0.3*0.64*100%);
+
+    .nav-big-blog-recent__heading {
+      height: 50px;
+      border-bottom: 1px solid rgb(184, 184, 184);
+      width: 100%;
+      display: grid;
+      font-size: 18px;
+      span {
+        padding-left: 15px;
+        align-self: center;
+      }
+    }
   }
 }
 
 .nav-small-blog-lists {
   display: none;
+  width: 100%;
   height: 50px;
   position: fixed;
   top: calc(100% - 50px);

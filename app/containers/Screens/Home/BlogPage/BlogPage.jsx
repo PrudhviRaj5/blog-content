@@ -10,6 +10,11 @@ import {
   List,
   ListItem,
 } from '@rmwc/list';
+import { Icon } from '@rmwc/icon';
+import {
+  Drawer,
+} from '@rmwc/drawer';
+import Button from 'components/Material/Button/CustomButton';
 
 import { fetchBlogPost } from 'actions/Home/BlogPage/BlogPage.ax';
 
@@ -37,9 +42,9 @@ class BlogPage extends Component {
     return Array(len).fill().map(() => React.createRef());
   }
 
-  // state = {
-  //   bool: false,
-  // }
+  state = {
+    outlineDrawer: true,
+  }
 
   outlineListId = 'blog-outline'
 
@@ -104,6 +109,7 @@ class BlogPage extends Component {
       self.headingEls.map((el, i) => (
         <ListItem
           key={self.generateKey('otline-key', i)}
+          className={`outline-list-item item-level-${self.headingEls[i].level}`}
           onClick={() => {
             window.scrollTo(
               0,
@@ -119,7 +125,14 @@ class BlogPage extends Component {
       <React.Fragment>
         <Comp />
         {
-          Array(20).fill().map(() => <ListItem>Test</ListItem>)
+          Array(20).fill().map((x, i) => (
+            <ListItem
+              className="outline-list-item"
+              key={self.generateKey('outline-arr', i)}
+            >
+              Test adasvda aaf af f ffafasf asffasfas af ajhdiufvafu afigifb af iuag
+            </ListItem>
+          ))
         }
       </React.Fragment>
     );
@@ -131,6 +144,8 @@ class BlogPage extends Component {
   render() {
     const self = this;
     const { data, fetching } = this.props;
+    const { outlineDrawer } = this.state;
+
     return (
       <Fragment>
         <div className="content-center-page blog-page">
@@ -168,23 +183,45 @@ class BlogPage extends Component {
             }
           </div>
           <nav className="nav-big-outline">
-            <Scrollbars
-              autoHide
-              autoHideTimeout={1000}
-              autoHideDuration={200}
+            <Button
+              icon="list_alt"
+              className="show-outline"
+              onClick={() => this.setState({ outlineDrawer: true })}
             >
-              <List
-                id={self.outlineListId}
+              Show Outline
+            </Button>
+            <Drawer dismissible open={outlineDrawer}>
+              <div className="nav-big-outline__heading">
+                <div className="nav-big-outline__heading-text"><span>Outline</span></div>
+                <div className="nav-big-outline__heading-icon">
+                  <Icon
+                    icon="clear"
+                    iconOptions={{ strategy: 'ligature' }}
+                    onClick={() => this.setState({ outlineDrawer: false })}
+                  />
+                </div>
+              </div>
+              <Scrollbars
+                autoHide
+                autoHideTimeout={1000}
+                autoHideDuration={200}
               >
-                {
-                  (() => {
-                    self.renderOutline();
-                  })()
-                }
-              </List>
-            </Scrollbars>
+                <List
+                  id={self.outlineListId}
+                >
+                  {
+                    (() => {
+                      self.renderOutline();
+                    })()
+                  }
+                </List>
+              </Scrollbars>
+            </Drawer>
           </nav>
-          <nav className="nav-big-blog-lists">
+          <nav className="nav-big-blog-recent">
+            <div className="nav-big-blog-recent__heading">
+              <span>Recent Blogs</span>
+            </div>
             <Scrollbars
               autoHide
               autoHideTimeout={1000}
@@ -192,7 +229,13 @@ class BlogPage extends Component {
             >
               <List>
                 {
-                  Array(10).fill().map(() => <ListItem>Some Test Article Item</ListItem>)
+                  Array(10).fill().map((x, i) => (
+                    <ListItem
+                      key={self.generateKey('test-arr', i)}
+                    >
+                      Some Test Article Item
+                    </ListItem>
+                  ))
                 }
               </List>
             </Scrollbars>
