@@ -33,6 +33,7 @@
     "material-components-web": "^0.43.0",
     "prop-types": "^15.6.2",
     "react": "16.7.0",
+    "react-accessible-accordion": "^2.4.5",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.7.0",
     "react-hot-loader": "4.6.3",
