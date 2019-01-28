@@ -51,6 +51,7 @@ class Archives extends Component {
   )
 
   getFilterData = (data) => {
+    data.sort((a, b) => new Date(b.date_published) - new Date(a.date_published));
     const filterMap = {};
     const sortHelper = [];
     const filterData = [];
@@ -77,6 +78,8 @@ class Archives extends Component {
     return filterData;
   }
 
+  generateKey = (str, i) => `${str}-${i}`
+
   render() {
     const { userData } = this.state;
     const filterData = this.getFilterData(userData);
@@ -86,20 +89,22 @@ class Archives extends Component {
         <div className="markdown-container">
           <Accordion accordion={false}>
             {
-              filterData.map(x => (
+              filterData.map((x, i) => (
                 <AccordionItem
-                  key={x.name}
+                  key={this.generateKey('acc-title', i)}
                 >
                   <AccordionItemTitle>
                     <h3 className="u-position-relative">
                       <div className="accordion__arrow" role="presentation" />
-                      {x.datePublished}
+                      {`${x.datePublished} (${x.dateWiseData.length})`}
                     </h3>
                   </AccordionItemTitle>
                   <AccordionItemBody>
                     {
-                      x.dateWiseData.map(y => (
-                        <div>
+                      x.dateWiseData.map((y, j) => (
+                        <div
+                          key={this.generateKey('acc-body', (i * 100 + j))}
+                        >
                           {`${y.date}: `}
                           <a
                             className="accordionLink"
