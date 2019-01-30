@@ -7,10 +7,15 @@
   }
 }
 
-.accordion__title {
+.accordion_heading {
   background-color: transparent;
-  padding: 5px;
+  // padding: 5px;
+  &:focus {
+    background-color: transparent;
+    outline: 0;
+  }
   &:hover {
+    cursor: pointer;
     background-color: transparent;
     outline: 0;
   }

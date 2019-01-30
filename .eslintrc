@@ -36,6 +36,7 @@
           ["constants", "./app/constants"],
           ["components", "./app/components"],
           ["containers", "./app/containers"],
+          ["utils", "./app/utils"],
           ["store", "./app/store"],
           ["actions", "./app/store/actions"],
           ["actionTypes", "./app/store/actionTypes"],

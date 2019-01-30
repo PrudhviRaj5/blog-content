@@ -3,6 +3,7 @@
     margin-left: 18%;
     margin-right: 18%;
     width: 64%;
+    min-height: calc(100vh - 64px);
   }
 
   @media only
@@ -45,9 +46,20 @@
   screen and (max-device-width : 480px)
   {
     .content-center-page {
-      margin-left: 5%;
-      margin-right: 5%;
-      width: 90%;
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%;
+    }
+  }
+
+  @media only
+  /* Desktops and laptops ----------- */
+  screen  and (max-width : 600px),
+  /* Smartphones (portrait and landscape) ----------- */
+  screen and (max-device-width : 480px)
+  {
+    .content-center-page {
+      min-height: calc(100vh - 56px);
     }
   }
 }

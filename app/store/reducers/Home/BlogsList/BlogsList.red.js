@@ -4,15 +4,19 @@ import {
 
 const initialState = {
   fetching: true,
-  data: {},
+  data: [],
 };
+
+const sortData = data => data.sort(
+  (a, b) => new Date(b.date_published) - new Date(a.date_published),
+);
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case HOME_FETCH_BLOGS_LIST:
       return {
         ...state,
-        data: payload,
+        data: sortData(payload),
         fetching: false,
       };
     default:

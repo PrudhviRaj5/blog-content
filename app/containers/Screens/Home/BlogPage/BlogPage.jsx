@@ -16,6 +16,7 @@ import {
 } from '@rmwc/drawer';
 import Button from 'components/Material/Button/CustomButton';
 
+import { generateKey } from 'utils/utils';
 import { fetchBlogPost } from 'actions/Home/BlogPage/BlogPage.ax';
 
 import './BlogPage.scss';
@@ -31,20 +32,20 @@ import 'highlight.js/styles/atom-one-dark.css';
 hljs.registerLanguage('js', javascript);
 hljs.registerLanguage('python', python);
 
-// class hTag extends Component {
-//   render() {
-
-//   }
-// }
 
 class BlogPage extends Component {
   static generateRefs = (len) => {
     return Array(len).fill().map(() => React.createRef());
   }
 
-  state = {
-    outlineDrawer: true,
-  }
+  // only for plain html content in md files
+  parseHtml = htmlParser({
+    isValidNode: () => {
+      // console.log(node);
+      return true;
+    },
+    // processingInstructions: [/* ... */],
+  })
 
   outlineListId = 'blog-outline'
 
@@ -56,18 +57,18 @@ class BlogPage extends Component {
 
   outlineCounter = 0
 
-  // only for plain html content in md files
-  parseHtml = htmlParser({
-    isValidNode: () => {
-      // console.log(node);
-      return true;
-    },
-    // processingInstructions: [/* ... */],
-  })
+  constructor(props) {
+    super(props);
+    this.state = {
+      outlineDrawer: false,
+    };
+  }
 
   componentDidMount() {
+    const { location: { pathname } } = this.props;
+    const url = pathname.split('blog_page')[1];
     const { fetchData } = this.props;
-    fetchData();
+    fetchData(url);
   }
 
   componentDidUpdate() {
@@ -82,33 +83,12 @@ class BlogPage extends Component {
     }
   }
 
-  hTag = (level, children, props) => {
-    switch (level) {
-      case 1:
-        return <h1 {...props}>{children}</h1>;
-      case 2:
-        return <h2 {...props}>{children}</h2>;
-      case 3:
-        return <h3 {...props}>{children}</h3>;
-      case 4:
-        return <h4 {...props}>{children}</h4>;
-      case 5:
-        return <h5 {...props}>{children}</h5>;
-      case 6:
-        return <h6 {...props}>{children}</h6>;
-      default:
-        return <p {...props}>{children}</p>;
-    }
-  }
-
-  generateKey = (str, i) => `${str}-${i}`
-
   renderOutline = () => {
     const self = this;
     const Comp = () => (
       self.headingEls.map((el, i) => (
         <ListItem
-          key={self.generateKey('otline-key', i)}
+          key={generateKey('outline-key', i)}
           className={`outline-list-item item-level-${self.headingEls[i].level}`}
           onClick={() => {
             window.scrollTo(
@@ -128,7 +108,7 @@ class BlogPage extends Component {
           Array(20).fill().map((x, i) => (
             <ListItem
               className="outline-list-item"
-              key={self.generateKey('outline-arr', i)}
+              key={generateKey('outline-arr', i)}
             >
               Test adasvda aaf af f ffafasf asffasfas af ajhdiufvafu afigifb af iuag
             </ListItem>
@@ -170,12 +150,17 @@ class BlogPage extends Component {
                           level: props.level,
                           text: props.children[0].props.value,
                         });
-                        return self.hTag(
-                          props.level,
-                          props.children[0].props.value,
+                        return React.createElement(
+                          `h${props.level}`,
                           { ref: self.allRefsArr[self.counter - 1] },
+                          props.children,
+                          // props.children[0].props.value,
                         );
                       },
+                      // image: (props) => {
+                      //   console.log('link-props', props);
+                      //   return 'a';
+                      // },
                     }}
                   />
                 ) : null;
@@ -231,7 +216,7 @@ class BlogPage extends Component {
                 {
                   Array(10).fill().map((x, i) => (
                     <ListItem
-                      key={self.generateKey('test-arr', i)}
+                      key={generateKey('test-arr', i)}
                     >
                       Some Test Article Item
                     </ListItem>
@@ -250,6 +235,7 @@ class BlogPage extends Component {
 }
 
 BlogPage.propTypes = {
+  location: PropTypes.any.isRequired,
   data: PropTypes.any.isRequired,
   fetchData: PropTypes.func.isRequired,
   fetching: PropTypes.bool.isRequired,
@@ -264,7 +250,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchData: () => dispatch(fetchBlogPost()),
+    fetchData: url => dispatch(fetchBlogPost(url)),
   };
 };
 

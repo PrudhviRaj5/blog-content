@@ -13,6 +13,6 @@ export default [
     path: '',
     key: 'blogs_list',
     component: BlogsList,
-    exact: false,
+    exact: true,
   },
 ];

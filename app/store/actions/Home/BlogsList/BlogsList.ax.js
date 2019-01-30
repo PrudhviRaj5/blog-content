@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// import { URL } from 'constants/app.config';
+import { URL } from 'constants/app.config';
 import {
   fetchResult,
   fetchError,
@@ -9,11 +9,11 @@ import {
   HOME_FETCH_BLOGS_LIST,
 } from 'actionTypes/Home.at';
 
+
 export const fetchBlogsList = () => (dispatch) => {
   axios({
     method: 'GET',
-    // url: `${URL}/blog-content/all_blog_urls.json`,
-    url: 'http://localhost:5500/blog-content/all_blog_urls.json',
+    url: `${URL}/blog-content/all_blog_urls.json`,
   })
     .then((response) => {
       dispatch(fetchResult(HOME_FETCH_BLOGS_LIST, response.data));

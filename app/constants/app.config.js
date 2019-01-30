@@ -1,8 +1,5 @@
-import webpackDevConfig from '../../webpack.dev';
-
+const PORT = 5500;
 const PROD_URL = 'https://raw.githubusercontent.com/PrudhviRaj5/my-awesome-blog/master';
-const DEV_URL = `http://localhost:${webpackDevConfig.devServer.port}`;
+const DEV_URL = `http://localhost:${PORT}`;
 
-module.exports = {
-  URL: process.env.NODE_ENV === 'prodution' ? PROD_URL : DEV_URL,
-};
+export const URL = process.env.NODE_ENV === 'prodution' ? PROD_URL : DEV_URL;

@@ -7,7 +7,7 @@ import SomeLogo from 'assets/images/zylo-logo.svg';
 
 export default {
   leftLink: {
-    path: '/',
+    path: '/home',
     name: 'Home',
     logoImg: SomeLogo,
     exact: false,

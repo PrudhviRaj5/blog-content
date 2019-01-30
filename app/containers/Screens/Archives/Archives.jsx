@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import {
   Accordion,
   AccordionItem,
   AccordionItemTitle,
   AccordionItemBody,
 } from 'react-accessible-accordion';
-import axios from 'axios';
-import {
-  fetchError,
-} from 'actions/common.ax';
+
+import { generateKey } from 'utils/utils';
+import { fetchBlogsList } from 'actions/Home/BlogsList/BlogsList.ax';
 
 import 'react-accessible-accordion/dist/fancy-example.css';
 import './Archives.scss';
@@ -18,28 +20,11 @@ const monthNames = [
   'July', 'August', 'September', 'October', 'November', 'December',
 ];
 class Archives extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      userData: [],
-    };
-  }
-
   componentDidMount() {
-    this.getUserData();
-  }
-
-  getUserData = (dispatch) => {
-    axios({
-      method: 'GET',
-      url: 'http://localhost:5500/blog-content/all_blog_urls.json',
-    })
-      .then((response) => {
-        this.setState({ userData: response.data });
-      })
-      .catch((e) => {
-        dispatch(fetchError(e));
-      });
+    const { fetching, fetchData } = this.props;
+    if (fetching) {
+      fetchData();
+    }
   }
 
   getMonthYear = datePublished => (
@@ -51,7 +36,6 @@ class Archives extends Component {
   )
 
   getFilterData = (data) => {
-    data.sort((a, b) => new Date(b.date_published) - new Date(a.date_published));
     const filterMap = {};
     const sortHelper = [];
     const filterData = [];
@@ -78,11 +62,9 @@ class Archives extends Component {
     return filterData;
   }
 
-  generateKey = (str, i) => `${str}-${i}`
-
   render() {
-    const { userData } = this.state;
-    const filterData = this.getFilterData(userData);
+    const { data } = this.props;
+    const filterData = this.getFilterData(data);
 
     return (
       <div className="content-center-page blog-page">
@@ -91,9 +73,11 @@ class Archives extends Component {
             {
               filterData.map((x, i) => (
                 <AccordionItem
-                  key={this.generateKey('acc-title', i)}
+                  key={generateKey('acc-title', i)}
                 >
-                  <AccordionItemTitle>
+                  <AccordionItemTitle
+                    className="accordion_heading"
+                  >
                     <h3 className="u-position-relative">
                       <div className="accordion__arrow" role="presentation" />
                       {`${x.datePublished} (${x.dateWiseData.length})`}
@@ -103,17 +87,17 @@ class Archives extends Component {
                     {
                       x.dateWiseData.map((y, j) => (
                         <div
-                          key={this.generateKey('acc-body', (i * 100 + j))}
+                          key={generateKey('acc-body', (i * 100 + j))}
                         >
                           {`${y.date}: `}
-                          <a
+                          <Link
                             className="accordionLink"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href={`${y.url}`}
+                            to={`/home/blog_page${y.url.split('.')[0]}`}
+                            // rel="noopener noreferrer"
+                            // href={`${y.url}`}
                           >
                             {y.name}
-                          </a>
+                          </Link>
                         </div>
                       ))
                     }
@@ -128,4 +112,23 @@ class Archives extends Component {
   }
 }
 
-export default Archives;
+Archives.propTypes = {
+  data: PropTypes.any.isRequired,
+  fetchData: PropTypes.func.isRequired,
+  fetching: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    data: state.Home_BlogsList.data,
+    fetching: state.Home_BlogsList.fetching,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchData: () => dispatch(fetchBlogsList()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Archives));

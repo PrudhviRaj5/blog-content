@@ -5,30 +5,26 @@ import { Elevation } from '@rmwc/elevation';
 
 import './VanillaPaper.scss';
 
-const paperElev = {
-  in: {
-    elevation: 8,
-  },
-  out: {
-    elevation: 2,
-  },
-};
-
-
 class VanillaPaper extends Component {
-  state = {
-    elevation: paperElev.out.elevation,
+  constructor(props) {
+    super(props);
+    const elevation = props.elevationOut;
+    this.state = {
+      elevation,
+    };
   }
 
   updateElevationMouseOver = () => {
+    const { elevationIn } = this.props;
     this.setState({
-      elevation: paperElev.in.elevation,
+      elevation: elevationIn,
     });
   }
 
   updateElevationMouseOut = () => {
+    const { elevationOut } = this.props;
     this.setState({
-      elevation: paperElev.out.elevation,
+      elevation: elevationOut,
     });
   }
 
@@ -36,7 +32,7 @@ class VanillaPaper extends Component {
     const {
       style,
       className,
-      sharpEdge,
+      rounded,
     } = this.props;
 
     const passProps = {
@@ -45,7 +41,7 @@ class VanillaPaper extends Component {
     const newClassName = {
       'zt-vanilla-paper': true,
     };
-    if (!sharpEdge) {
+    if (rounded) {
       newClassName['--rounded'] = true;
     }
     passProps.className = cx(newClassName, className);
@@ -72,14 +68,18 @@ class VanillaPaper extends Component {
 VanillaPaper.defaultProps = {
   style: {},
   className: '',
-  sharpEdge: false,
+  rounded: false,
+  elevationIn: 8,
+  elevationOut: 2,
 };
 
 VanillaPaper.propTypes = {
   style: PropTypes.instanceOf(Object),
   className: PropTypes.string,
-  sharpEdge: PropTypes.bool,
+  rounded: PropTypes.bool,
   children: PropTypes.instanceOf(Element).isRequired,
+  elevationIn: PropTypes.number,
+  elevationOut: PropTypes.number,
 };
 
 export default VanillaPaper;

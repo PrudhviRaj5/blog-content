@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// import { URL } from 'constants/app.config';
+import { URL } from 'constants/app.config';
 import {
   fetchResult,
   fetchError,
@@ -9,11 +9,10 @@ import {
   HOME_FETCH_BLOG_PAGE,
 } from 'actionTypes/Home.at';
 
-export const fetchBlogPost = () => (dispatch) => {
+export const fetchBlogPost = url => (dispatch) => {
   axios({
     method: 'GET',
-    // url: `${URL}/blog-content/all_blog_urls.json`,
-    url: 'https://raw.githubusercontent.com/wiki/PrudhviRaj5/blog-content/Home.md',
+    url: `${URL}${url}.md`, // adding .md to url; removed while adding to router
   })
     .then((response) => {
       dispatch(fetchResult(HOME_FETCH_BLOG_PAGE, response.data));

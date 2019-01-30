@@ -3,21 +3,6 @@ $nav_color: #24282d;
 .main__frame {
   .mdc-drawer {
     background-color: $nav_color;
-
-    .mdc-list {
-      .mdc-list-item {
-        color: #9b9b9b;
-        i {
-          color: #9b9b9b;
-        }
-      }
-      .mdc-list-item--activated {
-        color: #fff;
-        i {
-          color: #fff;
-        }
-      }
-    }
   }
 }
 
@@ -63,14 +48,14 @@ $nav_color: #24282d;
         .mdc-tab {
           height: 100%;
           text-transform: capitalize;
-          .mdc-tab__text-label {
-            color: white;
-          }
+          // .mdc-tab__text-label {
+          //   color: white;
+          // }
         }
         .mdc-tab--active {
-          .mdc-tab__text-label {
-            // color: #ef670d;
-          }
+          // .mdc-tab__text-label {
+          //   color: white;
+          // }
         }
       }
     }
@@ -90,20 +75,6 @@ screen and (max-device-width : 480px)
     }
     .top-bar__small-screen {
       display: flex;
-    }
-  }
-  .main__frame {
-    .main__body {
-      margin-top: 56px;
-    }
-  }
-}
-
-// // only for top-nav adjustment to body
-@media only screen and (min-device-width : 600px) and (max-device-width : 700px) {
-  .main__frame {
-    .main__body {
-      margin-top: 64px;
     }
   }
 }
