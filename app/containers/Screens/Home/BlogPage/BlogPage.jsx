@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import cx from 'classnames';
 import { render } from 'react-dom';
 import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
@@ -53,6 +54,8 @@ class BlogPage extends Component {
     const url = this.getPageUrl();
     this.state = {
       outlineDrawer: false,
+      bottomOutlineDrawer: false,
+      bottomRecentDrawer: false,
       url,
     };
   }
@@ -117,13 +120,19 @@ class BlogPage extends Component {
     );
     setTimeout(() => {
       render(<Comp />, document.getElementById(self.outlineListId));
-    }, 200);
+    }, 300);
   }
 
   render() {
     const self = this;
-    const { data, fetching, listData } = this.props;
-    const { outlineDrawer, url } = this.state;
+    const {
+      data, fetching,
+      listData, history,
+    } = this.props;
+    const {
+      outlineDrawer, url,
+      bottomOutlineDrawer, bottomRecentDrawer,
+    } = this.state;
 
     return (
       <Fragment>
@@ -177,7 +186,7 @@ class BlogPage extends Component {
           </div>
           <nav className="nav-big-outline">
             <Button
-              icon="list_alt"
+              icon="vertical_split"
               className="show-outline"
               onClick={() => this.setState({ outlineDrawer: true })}
             >
@@ -238,15 +247,74 @@ class BlogPage extends Component {
             </Scrollbars>
           </nav>
         </div>
-        <nav className="nav-small-blog-lists">
-          Hello
+        <nav className="bottom-nav-small">
+          <button
+            className="bottom-nav-items"
+            type="button"
+            onClick={() => self.setState({ bottomOutlineDrawer: !bottomOutlineDrawer })}
+          >
+            <Icon icon="vertical_split" iconOptions={{ strategy: 'ligature' }} />
+            <span>Outline</span>
+          </button>
+          <div />
+          <button
+            className="bottom-nav-items"
+            type="button"
+            onClick={() => history.push('/home')}
+          >
+            <Icon icon="home" iconOptions={{ strategy: 'ligature' }} />
+            <span>Home</span>
+          </button>
+          <div />
+          <button
+            className="bottom-nav-items"
+            type="button"
+            onClick={() => self.setState({ bottomRecentDrawer: !bottomRecentDrawer })}
+          >
+            <Icon icon="undo" iconOptions={{ strategy: 'ligature' }} />
+            <span>Recent</span>
+          </button>
         </nav>
+
+        <div
+          className={cx({ 'bottom-outline-drawer': true, '--close': !bottomOutlineDrawer })}
+        >
+          <div>
+            <h2>Outline</h2>
+            <Icon
+              icon="close"
+              iconOptions={{ strategy: 'ligature' }}
+              onClick={() => self.setState({ bottomOutlineDrawer: !bottomOutlineDrawer })}
+            />
+          </div>
+          <div>
+            Outline content goes here
+          </div>
+        </div>
+
+        <div
+          className={cx({ 'bottom-recent-drawer': true, '--close': !bottomRecentDrawer })}
+        >
+          <div>
+            <h2>Recent</h2>
+            <Icon
+              icon="close"
+              iconOptions={{ strategy: 'ligature' }}
+              onClick={() => self.setState({ bottomRecentDrawer: !bottomRecentDrawer })}
+            />
+          </div>
+          <div>
+            Recent content goes here
+          </div>
+        </div>
+
       </Fragment>
     );
   }
 }
 
 BlogPage.propTypes = {
+  history: PropTypes.any.isRequired,
   location: PropTypes.any.isRequired,
   data: PropTypes.any.isRequired,
   fetchData: PropTypes.func.isRequired,
