@@ -1,10 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { render } from 'react-dom';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Scrollbars } from 'react-custom-scrollbars';
 import ReactMarkdown from 'react-markdown';
-import htmlParser from 'react-markdown/plugins/html-parser';
 import { connect } from 'react-redux';
 import {
   List,
@@ -18,6 +17,7 @@ import Button from 'components/Material/Button/CustomButton';
 
 import { generateKey } from 'utils/utils';
 import { fetchBlogPost } from 'actions/Home/BlogPage/BlogPage.ax';
+import { fetchBlogsList } from 'actions/Home/BlogsList/BlogsList.ax';
 
 import './BlogPage.scss';
 
@@ -25,9 +25,9 @@ import hljs from 'highlight.js/lib/highlight';
 import javascript from 'highlight.js/lib/languages/javascript';
 import python from 'highlight.js/lib/languages/python';
 
-import 'highlight.js/styles/atom-one-dark.css';
+import { createElement } from './helper';
 
-// const htmlParser = require('react-markdown/plugins/html-parser');
+import 'highlight.js/styles/atom-one-dark.css';
 
 hljs.registerLanguage('js', javascript);
 hljs.registerLanguage('python', python);
@@ -38,18 +38,9 @@ class BlogPage extends Component {
     return Array(len).fill().map(() => React.createRef());
   }
 
-  // only for plain html content in md files
-  parseHtml = htmlParser({
-    isValidNode: () => {
-      // console.log(node);
-      return true;
-    },
-    // processingInstructions: [/* ... */],
-  })
-
   outlineListId = 'blog-outline'
 
-  allRefsArr = BlogPage.generateRefs(10)
+  allRefsArr = BlogPage.generateRefs(100)
 
   counter = 0
 
@@ -59,19 +50,42 @@ class BlogPage extends Component {
 
   constructor(props) {
     super(props);
+    const url = this.getPageUrl();
     this.state = {
       outlineDrawer: false,
+      url,
     };
   }
 
   componentDidMount() {
-    const { location: { pathname } } = this.props;
-    const url = pathname.split('blog_page')[1];
+    const { url } = this.state;
     const { fetchData } = this.props;
     fetchData(url);
+    const { listFetching, fetchListData } = this.props;
+    if (listFetching) {
+      fetchListData();
+    }
   }
 
   componentDidUpdate() {
+    const { fetchData } = this.props;
+    const pageUrl = this.getPageUrl();
+    const { url } = this.state;
+    if (pageUrl !== url) {
+      fetchData(pageUrl);
+      this.state.url = pageUrl;
+      // this.setState({ url: pageUrl });
+    }
+    this.hightlightCodeBlocks();
+  }
+
+  getPageUrl = () => {
+    const { location: { pathname } } = this.props;
+    const url = pathname.split('blog_page')[1];
+    return url;
+  }
+
+  hightlightCodeBlocks = () => {
     const preTagElms = document.querySelectorAll('pre');
     const { fetching } = this.props;
     if (!fetching) {
@@ -101,30 +115,15 @@ class BlogPage extends Component {
         </ListItem>
       ))
     );
-    const Comp1 = () => (
-      <React.Fragment>
-        <Comp />
-        {
-          Array(20).fill().map((x, i) => (
-            <ListItem
-              className="outline-list-item"
-              key={generateKey('outline-arr', i)}
-            >
-              Test adasvda aaf af f ffafasf asffasfas af ajhdiufvafu afigifb af iuag
-            </ListItem>
-          ))
-        }
-      </React.Fragment>
-    );
     setTimeout(() => {
-      render(<Comp1 />, document.getElementById(self.outlineListId));
+      render(<Comp />, document.getElementById(self.outlineListId));
     }, 200);
   }
 
   render() {
     const self = this;
-    const { data, fetching } = this.props;
-    const { outlineDrawer } = this.state;
+    const { data, fetching, listData } = this.props;
+    const { outlineDrawer, url } = this.state;
 
     return (
       <Fragment>
@@ -140,27 +139,36 @@ class BlogPage extends Component {
                     source={data}
                     escapeHtml={false}
                     linkTarget="_blank"
-                    astPlugins={[
-                      // this.parseHtml,
-                    ]}
+                    // astPlugins={[
+                    //   parseHtml,
+                    // ]}
+                    // https://github.com/rexxars/commonmark-react-renderer/blob/master/src/commonmark-react-renderer.js
                     renderers={{
+                      // assigning refs for h tags for scroll to for outline
                       heading: (props) => {
                         self.counter += 1;
                         self.headingEls.push({
                           level: props.level,
                           text: props.children[0].props.value,
                         });
-                        return React.createElement(
+                        return createElement(
                           `h${props.level}`,
                           { ref: self.allRefsArr[self.counter - 1] },
                           props.children,
-                          // props.children[0].props.value,
                         );
                       },
-                      // image: (props) => {
-                      //   console.log('link-props', props);
-                      //   return 'a';
-                      // },
+                      // to render images from local folder
+                      image: (props) => {
+                        const splitStr = 'blog-assets';
+                        const imgProps = { src: props.src, alt: props.alt };
+                        if (props.src.indexOf(splitStr) > -1) {
+                          imgProps.src = `/${splitStr}${props.src.split(splitStr)[1]}`;
+                        }
+                        return createElement(
+                          'img',
+                          imgProps,
+                        );
+                      },
                     }}
                   />
                 ) : null;
@@ -214,11 +222,15 @@ class BlogPage extends Component {
             >
               <List>
                 {
-                  Array(10).fill().map((x, i) => (
+                  listData.map((x, i) => (
                     <ListItem
                       key={generateKey('test-arr', i)}
+                      tag={Link}
+                      className="recent-list-item-link"
+                      to={`/home/blog_page${x.url.split('.')[0]}`}
+                      activated={url === x.url.split('.')[0]}
                     >
-                      Some Test Article Item
+                      {x.name}
                     </ListItem>
                   ))
                 }
@@ -239,18 +251,24 @@ BlogPage.propTypes = {
   data: PropTypes.any.isRequired,
   fetchData: PropTypes.func.isRequired,
   fetching: PropTypes.bool.isRequired,
+  listData: PropTypes.any.isRequired,
+  listFetching: PropTypes.bool.isRequired,
+  fetchListData: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
     data: state.Home_BlogPage.data,
     fetching: state.Home_BlogPage.fetching,
+    listData: state.Home_BlogsList.data,
+    listFetching: state.Home_BlogsList.fetching,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchData: url => dispatch(fetchBlogPost(url)),
+    fetchListData: () => dispatch(fetchBlogsList()),
   };
 };
 

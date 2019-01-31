@@ -4,8 +4,6 @@
 
 [link](https://www.google.com)
 
-![some-gif](https://i.gifer.com/Dmye.gif)
-
 ![some-gif](../blog-assets/images/Dmye.gif)
 
 Normal text\
@@ -26,6 +24,7 @@ Task List
 code Block line-1
 code Block line-2
 ```
+
 ```python
 a = 2
 print a

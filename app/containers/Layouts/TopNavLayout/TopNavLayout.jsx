@@ -49,6 +49,14 @@ class TopNavLayout extends Component {
     }
   }
 
+  componentDidUpdate() {
+    const actualActiveTab = this.getLocIndex(this.props);
+    const { activeTab } = this.state;
+    if (actualActiveTab !== activeTab) {
+      this.updateActiveTab(actualActiveTab);
+    }
+  }
+
   getLocIndex = ({ location }) => {
     let idx = null;
     topNavRoutes.centerLinks.forEach((l, i) => {

@@ -95,8 +95,28 @@
       display: grid;
       font-size: 18px;
       span {
-        padding-left: 15px;
+        font-weight: 700;
+        padding-left: 10px;
         align-self: center;
+      }
+    }
+
+    .mdc-list {
+
+      .recent-list-item-link {
+        height: 100%;
+        min-height: 40px;
+        font-size: 16px;
+        text-decoration: none;
+        cursor: pointer;
+        color: inherit;
+        background-color: transparent;
+
+        &.mdc-list-item--activated {
+          font-weight: 800;
+          background-color: transparent;
+          border-left: 4px solid #beebee;
+        }
       }
     }
   }

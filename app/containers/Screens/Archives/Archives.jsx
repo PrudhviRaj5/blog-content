@@ -93,8 +93,6 @@ class Archives extends Component {
                           <Link
                             className="accordionLink"
                             to={`/home/blog_page${y.url.split('.')[0]}`}
-                            // rel="noopener noreferrer"
-                            // href={`${y.url}`}
                           >
                             {y.name}
                           </Link>
