@@ -70,6 +70,7 @@ screen and (max-width : 700px),
 screen and (max-device-width : 480px)
 {
   .main__header.mdc-top-app-bar {
+    top: -1px;
     .top-bar__large-screen {
       display: none;
     }
