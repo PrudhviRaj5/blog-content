@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
-import { TextField } from '@rmwc/textfield';
+import TextField from 'components/Material/TextField';
+import Button from 'components/Material/Button';
 
-import '@rmwc/textfield/node_modules/@material/textfield/dist/mdc.textfield.css';
-import '@rmwc/textfield/node_modules/@material/floating-label/dist/mdc.floating-label.css';
-import '@rmwc/textfield/node_modules/@material/notched-outline/dist/mdc.notched-outline.css';
-import '@rmwc/textfield/node_modules/@material/line-ripple/dist/mdc.line-ripple.css';
+import './ContactMe.scss';
 
 class ContactMe extends Component {
   state = {}
 
   render() {
     return (
-      <div style={{ padding: '20px' }} className="content-center-page">
-        <TextField outlined withLeadingIcon="search" label="Name" />
-        <TextField outlined withLeadingIcon="search" label="Email" />
-        <TextField outlined withLeadingIcon="search" label="Company Name" />
-        <TextField outlined withLeadingIcon="search" label="Message" />
-        Contact Me
+      <div className="content-center-page contact-me-page">
+        <h1 className="contact-me-heading">Contact Me</h1>
+        <div className="contact-form">
+          <TextField required withLeadingIcon="account_circle" label="Name" />
+          <TextField required withLeadingIcon="email" label="Email" />
+          <TextField withLeadingIcon="work" label="Company Name" />
+          <TextField withLeadingIcon="phone" label="Phone Number" />
+          <TextField className="message-box" textarea required label="Message" rows="8" />
+          <div className="contact-me-submit"><Button rounded icon="touch_app">Submit</Button></div>
+        </div>
       </div>
     );
   }

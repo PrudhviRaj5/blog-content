@@ -67,7 +67,8 @@ class Archives extends Component {
     const filterData = this.getFilterData(data);
 
     return (
-      <div className="content-center-page blog-page">
+      <div className="content-center-page archives-page">
+        <h1 className="archives-heading">Archives</h1>
         <div className="markdown-container">
           <Accordion accordion={false}>
             {

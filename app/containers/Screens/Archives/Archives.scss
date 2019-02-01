@@ -1,3 +1,14 @@
+.archives-page {
+  padding: 20px;
+}
+
+.archives-heading {
+  padding-bottom: 10px;
+  padding-left: 5px;
+  font-size: 3em;
+  border-bottom: 1px dotted lightgrey;
+}
+
 .accordion {
   border: none;
   border-radius: 0;
@@ -27,4 +38,21 @@
 
 .accordion__body {
   padding: 5px 38px;
+}
+
+/* css for both resized desktops and mobiles */
+@media only
+/* Desktops and laptops ----------- */
+screen and (max-width : 700px),
+/* Smartphones (portrait and landscape) ----------- */
+screen and (max-device-width : 480px)
+{
+  .main__body{
+    .content-center-page.archives-page {
+      width: calc(100% - 40px);
+    }
+  }
+  .contact-me-heading {
+    font-size: 2em;
+  }
 }

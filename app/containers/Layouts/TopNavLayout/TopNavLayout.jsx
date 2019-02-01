@@ -114,6 +114,7 @@ class TopNavLayout extends Component {
 
         <Drawer
           modal
+          className="sidebar-nav"
           open={drawerOpen}
           onClose={() => this.setState({ drawerOpen: false })}
         >
@@ -128,7 +129,7 @@ class TopNavLayout extends Component {
                     activated={activeTab === i}
                     onClick={() => this.updateActiveTab(i)}
                   >
-                    <ListItemGraphic icon="favorite" />
+                    <ListItemGraphic icon={eachLink.icon} />
                     {eachLink.name}
                   </ListItem>
                 ))

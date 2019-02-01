@@ -2,6 +2,21 @@
   .main__body {
     margin-top: 64px;
   }
+
+  .sidebar-nav {
+    .mdc-list-item {
+      color: rgba(255, 255, 255, 0.7);
+      .mdc-list-item__graphic {
+        color:  rgba(255, 255, 255, 0.7);
+      }
+    }
+    .mdc-list-item--activated {
+      color: var(--mdc-theme-primary);
+      .mdc-list-item__graphic {
+        color: var(--mdc-theme-primary);
+      }
+    }
+  }
 }
 
 .top-nav-logo {
@@ -22,7 +37,7 @@ screen and (max-device-width : 480px)
 {
   .main__frame {
     .main__body {
-      margin-top: 56px;
+      margin-top: 54px;
     }
   }
 }
