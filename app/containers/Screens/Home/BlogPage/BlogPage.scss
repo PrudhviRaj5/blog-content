@@ -21,13 +21,13 @@
       position: absolute;
       top: 40%;
       left: -10px;
-      background-color: #24282d;
+      background-color: rgb(36, 40, 45);
       border-top-right-radius: 18px;
       border-bottom-right-radius: 18px;
     }
 
     .mdc-drawer {
-      // background-color: rgba(0, 0, 0, 0.8);
+      background-color: rgb(36, 40, 45);
     }
 
     .mdc-list {
@@ -37,18 +37,21 @@
         cursor: pointer;
         height: 100%;
         min-height: 40px;
+        color: rgb(185, 185, 185);
+        margin-top: 5px;
+        margin-bottom: 5px;
       }
       .item-level-1 {
         font-size: 18px;
         font-weight: 800;
       }
       .item-level-2 {
-        padding-left: 30px;
+        padding-left: 20px;
         font-size: 16px;
         font-weight: 600;
       }
       .item-level-3 {
-        padding-left: 45px;
+        padding-left: 30px;
         font-size: 14px;
         font-weight: 500;
       }
@@ -156,13 +159,64 @@
   height: 80vh;
   top: 20vh;
   overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.8);
   color: #FFF;
   transition: all 1s;
 
   &.--close {
     top: 100vh;
     height: 0;
+  }
+  .drawer-heading {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.9);
+    h2 {
+      margin: 10px;
+    }
+    i {
+      margin: auto;
+    }
+  }
+  .mdc-list {
+    margin-bottom: 70px;
+    display: grid;
+
+    .outline-list-item {
+      cursor: pointer;
+      height: 100%;
+      min-height: 40px;
+      color: rgb(185, 185, 185);
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+    .item-level-1 {
+      font-size: 18px;
+      font-weight: 800;
+    }
+    .item-level-2 {
+      padding-left: 30px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .item-level-3 {
+      padding-left: 45px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .recent-list-item-link {
+      color: rgba(255, 255, 255, 0.5);
+      margin: auto;
+      font-size: 1.5em;
+      border: 0;
+      background-color: transparent;
+      &.mdc-list-item--activated {
+        color: rgba(255, 255, 255, 0.8);
+        &::after {
+          background-color: transparent;
+        }
+      }
+    }
   }
 }
 

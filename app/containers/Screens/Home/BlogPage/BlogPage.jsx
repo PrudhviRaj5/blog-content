@@ -16,6 +16,7 @@ import {
 } from '@rmwc/drawer';
 import Button from 'components/Material/Button/CustomButton';
 
+import { URL } from 'constants/app.config';
 import { generateKey } from 'utils/utils';
 import { fetchBlogPost } from 'actions/Home/BlogPage/BlogPage.ax';
 import { fetchBlogsList } from 'actions/Home/BlogsList/BlogsList.ax';
@@ -118,8 +119,24 @@ class BlogPage extends Component {
         </ListItem>
       ))
     );
+    // const Comp1 = () => (
+    //   <React.Fragment>
+    //     <Comp />
+    //     {
+    //       Array(10).fill().map(j => (
+    //         <ListItem
+    //           key={generateKey('next-outline-key', j)}
+    //           className="outline-list-item item-level-2"
+    //         >
+    //           Im just testing
+    //         </ListItem>
+    //       ))
+    //     }
+    //   </React.Fragment>
+    // );
     setTimeout(() => {
-      render(<Comp />, document.getElementById(self.outlineListId));
+      render(<Comp />, document.getElementById(`${self.outlineListId}-big`));
+      render(<Comp />, document.getElementById(`${self.outlineListId}-small`));
     }, 300);
   }
 
@@ -171,7 +188,7 @@ class BlogPage extends Component {
                         const splitStr = 'blog-assets';
                         const imgProps = { src: props.src, alt: props.alt };
                         if (props.src.indexOf(splitStr) > -1) {
-                          imgProps.src = `/${splitStr}${props.src.split(splitStr)[1]}`;
+                          imgProps.src = `${URL}/${splitStr}${props.src.split(splitStr)[1]}`;
                         }
                         return createElement(
                           'img',
@@ -209,7 +226,7 @@ class BlogPage extends Component {
                 autoHideDuration={200}
               >
                 <List
-                  id={self.outlineListId}
+                  id={`${self.outlineListId}-big`}
                 >
                   {
                     (() => {
@@ -279,7 +296,7 @@ class BlogPage extends Component {
         <div
           className={cx({ 'bottom-outline-drawer': true, '--close': !bottomOutlineDrawer })}
         >
-          <div>
+          <div className="drawer-heading">
             <h2>Outline</h2>
             <Icon
               icon="close"
@@ -287,15 +304,21 @@ class BlogPage extends Component {
               onClick={() => self.setState({ bottomOutlineDrawer: !bottomOutlineDrawer })}
             />
           </div>
-          <div>
-            Outline content goes here
-          </div>
+          <Scrollbars
+            autoHide
+            autoHideTimeout={1000}
+            autoHideDuration={200}
+          >
+            <List
+              id={`${self.outlineListId}-small`}
+            />
+          </Scrollbars>
         </div>
 
         <div
           className={cx({ 'bottom-recent-drawer': true, '--close': !bottomRecentDrawer })}
         >
-          <div>
+          <div className="drawer-heading">
             <h2>Recent</h2>
             <Icon
               icon="close"
@@ -303,9 +326,27 @@ class BlogPage extends Component {
               onClick={() => self.setState({ bottomRecentDrawer: !bottomRecentDrawer })}
             />
           </div>
-          <div>
-            Recent content goes here
-          </div>
+          <Scrollbars
+            autoHide
+            autoHideTimeout={1000}
+            autoHideDuration={200}
+          >
+            <List>
+              {
+                listData.map((x, i) => (
+                  <ListItem
+                    key={generateKey('test-arr', i)}
+                    tag={Link}
+                    className="recent-list-item-link"
+                    to={`/home/blog_page${x.url.split('.')[0]}`}
+                    activated={url === x.url.split('.')[0]}
+                  >
+                    {x.name}
+                  </ListItem>
+                ))
+              }
+            </List>
+          </Scrollbars>
         </div>
 
       </Fragment>
