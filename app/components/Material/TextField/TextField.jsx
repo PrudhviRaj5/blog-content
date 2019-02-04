@@ -72,7 +72,7 @@ TextBox.propTypes = {
   label: PropTypes.any.isRequired,
   textarea: PropTypes.bool,
   type: PropTypes.string,
-  fullwidth: PropTypes.string,
+  fullwidth: PropTypes.bool,
   inputRef: PropTypes.any,
   disabled: PropTypes.bool,
   required: PropTypes.bool,
