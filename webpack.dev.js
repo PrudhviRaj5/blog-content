@@ -31,7 +31,12 @@ const config = {
     historyApiFallback: true,
     publicPath: '/',
     host: '0.0.0.0',
+    disableHostCheck: true,
     port: PORT,
+    public: '',
+    // allowedHosts: [
+    //   'aff8577e.ngrok.io',
+    // ],
   },
 };
 

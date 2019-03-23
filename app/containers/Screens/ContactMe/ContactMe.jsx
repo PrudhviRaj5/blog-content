@@ -93,21 +93,15 @@ class ContactMe extends Component {
           <TextField
             withLeadingIcon="work"
             label="Company Name"
-            inputRef={elm => this.setTextInputRef(elm, 'phoneRef')}
+            inputRef={elm => this.setTextInputRef(elm, 'companyRef')}
           />
           <TextField
             withLeadingIcon="phone"
             label="Phone Number"
-            inputRef={elm => this.setTextInputRef(elm, 'companyRef')}
+            inputRef={elm => this.setTextInputRef(elm, 'phoneRef')}
           />
-          <TextField
-            className="message-box"
-            textarea
-            required
-            label="Message"
-            rows="8"
-            inputRef={elm => this.setTextInputRef(elm, 'messageRef')}
-          />
+          <span className="message-label">Message*</span>
+          <textarea className="message-box" ref={elm => this.setTextInputRef(elm, 'messageRef')} />
           <div className="contact-me-submit">
             <Button
               rounded
