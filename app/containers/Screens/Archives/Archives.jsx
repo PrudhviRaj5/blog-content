@@ -3,16 +3,15 @@ import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
-  Accordion,
-  AccordionItem,
-  AccordionItemTitle,
-  AccordionItemBody,
-} from 'react-accessible-accordion';
+  List,
+  CollapsibleList,
+  SimpleListItem,
+} from '@rmwc/list';
 
 import { generateKey } from 'utils/utils';
 import { fetchBlogsList } from 'actions/Home/BlogsList/BlogsList.ax';
 
-import 'react-accessible-accordion/dist/fancy-example.css';
+import '@rmwc/list/collapsible-list.css';
 import './Archives.scss';
 
 const monthNames = [
@@ -69,22 +68,55 @@ class Archives extends Component {
     return (
       <div className="content-center-page archives-page">
         <h1 className="archives-heading">Archives</h1>
+        <List>
+          {
+            filterData.map((x, i) => (
+              <CollapsibleList
+                key={generateKey('acc-title', i)}
+                handle={(
+                  <SimpleListItem
+                    text={`${x.datePublished} (${x.dateWiseData.length})`}
+                    metaIcon="chevron_right"
+                  />
+                )}
+                // onOpen={() => console.log('open')}
+                // onClose={() => console.log('close')}
+              >
+                {
+                  x.dateWiseData.map((y, j) => (
+                    <div
+                      key={generateKey('acc-body', (i * 100 + j))}
+                    >
+                      {`${y.date}: `}
+                      <Link
+                        className="accordionLink"
+                        to={`/home/blog_page${y.url.split('.')[0]}`}
+                      >
+                        {y.name}
+                      </Link>
+                    </div>
+                  ))
+                }
+              </CollapsibleList>
+            ))
+          }
+        </List>
         <div className="markdown-container">
-          <Accordion accordion={false}>
+          <div accordion={false}>
             {
               filterData.map((x, i) => (
-                <AccordionItem
+                <div
                   key={generateKey('acc-title', i)}
                 >
-                  <AccordionItemTitle
+                  <div
                     className="accordion_heading"
                   >
                     <h3 className="u-position-relative">
                       <div className="accordion__arrow" role="presentation" />
                       {`${x.datePublished} (${x.dateWiseData.length})`}
                     </h3>
-                  </AccordionItemTitle>
-                  <AccordionItemBody>
+                  </div>
+                  <div>
                     {
                       x.dateWiseData.map((y, j) => (
                         <div
@@ -100,11 +132,11 @@ class Archives extends Component {
                         </div>
                       ))
                     }
-                  </AccordionItemBody>
-                </AccordionItem>
+                  </div>
+                </div>
               ))
             }
-          </Accordion>
+          </div>
         </div>
       </div>
     );
