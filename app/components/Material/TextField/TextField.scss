@@ -1,22 +1,16 @@
 .m-txt.m-txt {
-  &.mdc-text-field{
-    label {
-      left: 48px;
-      top: 18px;
-    }
-  }
-  &.mdc-text-field--dense {
-    label {
-      top: 14px;
-    }
-  }
+  // &.mdc-text-field{
+  //   label {
+  //     left: 48px;
+  //     top: 18px;
+  //   }
+  // }
   &.mdc-text-field--textarea {
-    padding-top: 10px;
-
-    label {
-      background-color: transparent;
-      top: 32px;
-      left: 5px;
+    .mdc-text-field-character-counter {
+      bottom: 0px;
+    }
+    textarea {
+      margin-bottom: 0;
     }
   }
 }

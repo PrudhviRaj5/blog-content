@@ -61,6 +61,7 @@ class ContactMe extends Component {
         this.contactRefs.phoneRef.value = '';
         this.contactRefs.companyRef.value = '';
         this.contactRefs.messageRef.value = '';
+        this.setState({ snackbarIsOpen: true, snackbarMsg: 'Your Message has been sent!' });
       });
   }
 
@@ -73,35 +74,48 @@ class ContactMe extends Component {
           open={snackbarIsOpen}
           onClose={() => this.setState({ snackbarIsOpen: false })}
           message={snackbarMsg}
-          timeout={3000}
-          // dismissesOnAction
+          timeout={1500}
         />
         <h1 className="contact-me-heading">Contact Me</h1>
         <div className="contact-form">
           <TextField
             required
-            withLeadingIcon="account_circle"
+            icon="account_circle"
             label="Name"
             inputRef={elm => this.setTextInputRef(elm, 'nameRef')}
           />
           <TextField
             required
-            withLeadingIcon="email"
+            icon="email"
             label="Email"
             inputRef={elm => this.setTextInputRef(elm, 'emailRef')}
           />
           <TextField
-            withLeadingIcon="work"
+            icon="work"
             label="Company Name"
             inputRef={elm => this.setTextInputRef(elm, 'companyRef')}
           />
           <TextField
-            withLeadingIcon="phone"
+            icon="phone"
             label="Phone Number"
             inputRef={elm => this.setTextInputRef(elm, 'phoneRef')}
           />
-          <span className="message-label">Message*</span>
-          <textarea className="message-box" ref={elm => this.setTextInputRef(elm, 'messageRef')} />
+          {/* <span className="message-label">Please input your Message below</span> */}
+          <TextField
+            className="message-box"
+            textarea
+            required
+            label="Message"
+            inputRef={elm => this.setTextInputRef(elm, 'messageRef')}
+            fullwidth
+            rows={4}
+            maxLength={200}
+            characterCount
+            helpText={{
+              validationMsg: true,
+              children: 'This field is required',
+            }}
+          />
           <div className="contact-me-submit">
             <Button
               rounded
