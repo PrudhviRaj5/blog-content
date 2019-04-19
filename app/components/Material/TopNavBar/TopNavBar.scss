@@ -34,28 +34,25 @@ $nav_color: #24282d;
       width: 400px;
       padding-top: 0px;
       padding-bottom: 0px;
-      .mdc-tab-bar {
+      display: inline-grid;
+      
+      .tab-bar-layout__tabs {
         height: 100%;
-      }
-      .mdc-tab-scroller {
-        height: 100%;
-      }
-      .mdc-tab-scroller__scroll-area {
-        height: 100%;
-      }
-      .mdc-tab-scroller__scroll-content {
-        height: 100%;
-        .mdc-tab {
-          height: 100%;
+        .tab-layout__tab {
+          height: 100% !important;
+          float: left;
           text-transform: capitalize;
-          // .mdc-tab__text-label {
-          //   color: white;
-          // }
-        }
-        .mdc-tab--active {
-          // .mdc-tab__text-label {
-          //   color: white;
-          // }
+          padding: 0px;
+          height: 56px;
+          padding-left: 20px;
+          padding-right: 20px;
+
+          &:hover {
+            background-color: #4c545e;
+          }
+          &.tab-layout__tab--active {
+            border-bottom: 4px solid #ff6e3b;
+          }
         }
       }
     }

@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import cx from 'classnames';
 import {
   TopAppBar,
   TopAppBarRow,
   TopAppBarSection,
   TopAppBarNavigationIcon,
 } from '@rmwc/top-app-bar';
-import { TabBar, Tab } from '@rmwc/tabs';
-// import { Menu, MenuItem, MenuSurfaceAnchor } from '@rmwc/menu';
 
 import './TopNavBar.scss';
 
@@ -71,28 +69,30 @@ const TopNavBar = (props) => {
         </TopAppBarSection>
 
         <TopAppBarSection className="top-bar__tab-section">
-          <TabBar
-            activeTabIndex={activeTab}
-            onActivate={(evt) => {
-              if (props.activeTab !== null) {
-                updateActiveTab(evt.detail.index);
-              } else {
-                updateActiveTab(null);
-              }
-            }}
+          <nav
+            className="tab-bar-layout__tabs"
           >
             {
-              centerLinks.map(eachLink => (
-                <Tab
-                  key={eachLink.key}
-                  tag={Link}
-                  to={eachLink.path}
+              centerLinks.map((e, i) => (
+                <button
+                  className={cx({
+                    'tab-layout__tab': true,
+                    'mdc-tab': true,
+                    'tab-layout__tab--active': activeTab === i,
+                  })}
+                  type="button"
+                  key={e.key}
+                  onClick={() => updateActiveTab(i)}
                 >
-                  {eachLink.name}
-                </Tab>
+                  <div className="mdc-tab__content">
+                    <span className="mdc-tab__text-label">
+                      {e.name}
+                    </span>
+                  </div>
+                </button>
               ))
             }
-          </TabBar>
+          </nav>
         </TopAppBarSection>
 
         <TopAppBarSection

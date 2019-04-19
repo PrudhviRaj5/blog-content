@@ -35,29 +35,36 @@ const ZyloLogo = () => (
 class TopNavLayout extends Component {
   constructor(props) {
     super(props);
+    const locIndex = this.getLocIndex();
     this.state = {
       drawerOpen: false,
-      activeTab: this.getLocIndex(props),
+      activeTab: locIndex || 0,
     };
   }
 
   componentDidMount() {
-    const { activeTab } = this.state;
+    const activeIdx = this.getLocIndex();
+    if (activeIdx === null) {
+      const { activeTab } = this.state;
+      this.pushRoute(activeTab);
+    }
+  }
+
+  // componentDidUpdate() {
+  //   const actualActiveTab = this.getLocIndex(this.props);
+  //   const { activeTab } = this.state;
+  //   if (actualActiveTab !== activeTab) {
+  //     this.updateActiveTab(actualActiveTab);
+  //   }
+  // }
+
+  pushRoute = (idx) => {
     const { history } = this.props;
-    if (activeTab === null) {
-      history.push('/home');
-    }
+    history.push(topNavRoutes.centerLinks[idx].path);
   }
 
-  componentDidUpdate() {
-    const actualActiveTab = this.getLocIndex(this.props);
-    const { activeTab } = this.state;
-    if (actualActiveTab !== activeTab) {
-      this.updateActiveTab(actualActiveTab);
-    }
-  }
-
-  getLocIndex = ({ location }) => {
+  getLocIndex = () => {
+    const { location } = this.props;
     let idx = null;
     topNavRoutes.centerLinks.forEach((l, i) => {
       if (location.pathname.includes(l.path)) {
@@ -67,26 +74,11 @@ class TopNavLayout extends Component {
     return idx;
   }
 
-  slowUpdateActiveTab = () => {
-    const self = this;
-    setTimeout(() => {
-      const aT = self.getLocIndex(self.props);
-      if (aT !== null) {
-        this.setState({
-          activeTab: aT,
-        });
-      }
-    }, 100);
-  }
-
   updateActiveTab = (idx) => {
-    if (idx === null) {
-      this.slowUpdateActiveTab();
-    } else {
-      this.setState({
-        activeTab: idx,
-      });
-    }
+    this.setState({
+      activeTab: idx,
+    });
+    this.pushRoute(idx);
   }
 
   toggleDrawer = () => {
@@ -160,6 +152,7 @@ class TopNavLayout extends Component {
 
 TopNavLayout.propTypes = {
   history: PropTypes.any.isRequired,
+  location: PropTypes.any.isRequired,
 };
 
 export default withRouter(TopNavLayout);
