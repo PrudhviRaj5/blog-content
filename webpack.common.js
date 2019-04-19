@@ -14,7 +14,8 @@ const config = {
 
   resolve: {
     modules: ['app', 'node_modules'],
-    extensions: ['*', '.js', '.jsx', '.css', '.scss'],
+    extensions: ['.js', '.jsx', '.css', '.scss'],
+    mainFields: ['browser', 'jsnext:main', 'main'],
   },
 
   module: {
@@ -41,7 +42,9 @@ const config = {
             loader: 'sass-loader',
             query: {
               sourceMap: false,
-              includePaths: ['./node_modules'],
+              includePaths: [
+                resolve(__dirname, 'node_modules'),
+              ],
             },
           },
         ],
@@ -126,9 +129,8 @@ const config = {
     new webpack.optimize.ModuleConcatenationPlugin(),
     new HtmlWebpackPlugin({
       template: `${__dirname}/app/index.html`,
-      title: 'Prudhvi Blog',
       filename: 'index.html',
-      inject: 'body',
+      inject: true,
     }),
     // new CopyWebpackPlugin([{ from: 'vendors', to: 'vendors' }]),
   ],

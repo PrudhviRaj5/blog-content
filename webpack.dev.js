@@ -17,7 +17,7 @@ const config = {
 
   output: {
     filename: './js/[name].dev.js',
-    chunkFilename: 'js/[name].dev.js',
+    // chunkFilename: 'js/[name].dev.js',
     publicPath: '/',
   },
 
