@@ -31,7 +31,7 @@ class Archives extends Component {
   )
 
   getDate = datePublished => (
-    `${new Date(datePublished).getDate()}`
+    `0${new Date(datePublished).getDate()}`.slice(-2)
   )
 
   getFilterData = (data) => {
@@ -72,6 +72,7 @@ class Archives extends Component {
           {
             filterData.map((x, i) => (
               <CollapsibleList
+                className="collapsible"
                 key={generateKey('acc-title', i)}
                 handle={(
                   <SimpleListItem
@@ -86,10 +87,11 @@ class Archives extends Component {
                   x.dateWiseData.map((y, j) => (
                     <div
                       key={generateKey('acc-body', (i * 100 + j))}
+                      className="link-wrapper"
                     >
                       {`${y.date}: `}
                       <Link
-                        className="accordionLink"
+                        className="link-item"
                         to={`/home/blog_page${y.url.split('.')[0]}`}
                       >
                         {y.name}
@@ -101,43 +103,6 @@ class Archives extends Component {
             ))
           }
         </List>
-        <div className="markdown-container">
-          <div accordion={false}>
-            {
-              filterData.map((x, i) => (
-                <div
-                  key={generateKey('acc-title', i)}
-                >
-                  <div
-                    className="accordion_heading"
-                  >
-                    <h3 className="u-position-relative">
-                      <div className="accordion__arrow" role="presentation" />
-                      {`${x.datePublished} (${x.dateWiseData.length})`}
-                    </h3>
-                  </div>
-                  <div>
-                    {
-                      x.dateWiseData.map((y, j) => (
-                        <div
-                          key={generateKey('acc-body', (i * 100 + j))}
-                        >
-                          {`${y.date}: `}
-                          <Link
-                            className="accordionLink"
-                            to={`/home/blog_page${y.url.split('.')[0]}`}
-                          >
-                            {y.name}
-                          </Link>
-                        </div>
-                      ))
-                    }
-                  </div>
-                </div>
-              ))
-            }
-          </div>
-        </div>
       </div>
     );
   }

@@ -1,43 +1,27 @@
 .archives-page {
   padding: 20px;
+
+  .rmwc-collapsible-list__handle {
+    font-weight: 600;
+  }
+  .rmwc-collapsible-list__children {
+    .link-wrapper {
+      padding-left: 30px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      .link-item {
+
+      }
+    }
+  }
 }
 
 .archives-heading {
   padding-bottom: 10px;
   padding-left: 5px;
+  margin-bottom: 10px;
   font-size: 3em;
   border-bottom: 1px dotted lightgrey;
-}
-
-.accordion {
-  border: none;
-  border-radius: 0;
-  a.accordionLink {
-    text-decoration: none;
-    color: #e67627;
-  }
-}
-
-.accordion_heading {
-  background-color: transparent;
-  // padding: 5px;
-  &:focus {
-    background-color: transparent;
-    outline: 0;
-  }
-  &:hover {
-    cursor: pointer;
-    background-color: transparent;
-    outline: 0;
-  }
-}
-
-.accordion__item + .accordion__item {
-  border-top: none;
-}
-
-.accordion__body {
-  padding: 5px 38px;
 }
 
 /* css for both resized desktops and mobiles */
@@ -52,7 +36,7 @@ screen and (max-device-width : 480px)
       width: calc(100% - 40px);
     }
   }
-  .contact-me-heading {
+  .archives-heading {
     font-size: 2em;
   }
 }
