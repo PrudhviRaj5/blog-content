@@ -1,1 +1,1 @@
-{"version":3,"file":"js/npm.axios.bundle.js","sources":["webpack:///../node_modules/axios/index.js"],"sourcesContent":["module.exports = require('./lib/axios');"],"mappings":"AAAA","sourceRoot":""}
+{"version":3,"file":"js/npm.axios.bundle.js","sources":["webpack:///js/npm.axios.bundle.js"],"mappings":"AAAA","sourceRoot":""}

@@ -1,3 +1,4 @@
+const { resolve } = require('path');
 const webpack = require('webpack');
 const commonConfig = require('./webpack.common');
 
@@ -12,12 +13,12 @@ const config = {
     `webpack-dev-server/client?http://0.0.0.0:${PORT}`,
     'webpack/hot/only-dev-server',
     'react-hot-loader/patch',
-    './main.jsx',
+    './app.jsx',
   ],
 
   output: {
     filename: './js/[name].dev.js',
-    // chunkFilename: 'js/[name].dev.js',
+    path: resolve(__dirname, 'dist'),
     publicPath: '/',
   },
 
@@ -33,10 +34,6 @@ const config = {
     host: '0.0.0.0',
     disableHostCheck: true,
     port: PORT,
-    public: '',
-    // allowedHosts: [
-    //   'aff8577e.ngrok.io',
-    // ],
   },
 };
 
@@ -44,11 +41,10 @@ const devPlugins = [
   new webpack.HotModuleReplacementPlugin(),
 ];
 
-const devConfig = Object.assign(
-  {},
-  commonConfig,
-  config,
-);
+const devConfig = {
+  ...commonConfig,
+  ...config,
+};
 
 devPlugins.forEach((eachPlugin) => {
   devConfig.plugins.push(eachPlugin);

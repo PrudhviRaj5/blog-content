@@ -42,9 +42,9 @@ const config = {
             loader: 'sass-loader',
             query: {
               sourceMap: false,
-              includePaths: [
-                resolve(__dirname, 'node_modules'),
-              ],
+              // includePaths: [
+              //   resolve(__dirname, 'node_modules'),
+              // ],
             },
           },
         ],

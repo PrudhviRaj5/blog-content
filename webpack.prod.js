@@ -1,6 +1,6 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -14,7 +14,7 @@ const config = {
   devtool: 'cheap-module-source-map',
 
   entry: [
-    './main.jsx',
+    './app.jsx',
   ],
 
   output: {
@@ -96,11 +96,10 @@ const prodPlugins = [
   }),
 ];
 
-const prodConfig = Object.assign(
-  {},
-  commonConfig,
-  config,
-);
+const prodConfig = {
+  ...commonConfig,
+  ...config,
+};
 
 prodPlugins.forEach((eachPlugin) => {
   prodConfig.plugins.push(eachPlugin);

@@ -45,6 +45,10 @@ $nav_color: #24282d;
           float: left;
           text-transform: capitalize;
 
+          .mdc-tab__text-label {
+            color: white;
+          }
+
           &:hover {
             background-color: #4c545e;
           }

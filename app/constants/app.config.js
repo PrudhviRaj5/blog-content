@@ -1,7 +1,6 @@
 const PORT = 5500;
 const PROD_URL = 'https://raw.githubusercontent.com/PrudhviRaj5/my-awesome-blog/master';
 const DEV_URL = `http://localhost:${PORT}`;
-// const DEV_URL = 'http://aff8577e.ngrok.io';
 
 export const URL = process.env.NODE_ENV === 'production' ? PROD_URL : DEV_URL;
 export const SECRET_SALT = 'AT2F27K812BR';

@@ -22,6 +22,7 @@ const TextBox = (props) => {
   return (
     <TextField
       className={cx(clName)}
+      // eslint-disable-next-line react/jsx-props-no-spreading
       {...rest}
     />
   );
