@@ -88,10 +88,10 @@ const BlogPage = (props) => {
           key={generateKey('outline-key', i)}
           className={`outline-list-item item-level-${headingEls[i].level}`}
           onClick={() => {
-            window.scrollTo(
-              0,
-              allRefsArr[i].current.offsetTop,
-            );
+            window.scrollTo({
+              top: allRefsArr[i].current.offsetTop,
+              behavior: 'smooth',
+            });
           }}
         >
           {headingEls[i].text}
@@ -99,10 +99,10 @@ const BlogPage = (props) => {
       ))
     );
     // const Comp1 = () => (
-    //   <React.Fragment>
+    //   <>
     //     <Comp />
     //     {
-    //       Array(10).fill().map(j => (
+    //       Array(10).fill().map((j) => (
     //         <ListItem
     //           key={generateKey('next-outline-key', j)}
     //           className="outline-list-item item-level-2"
@@ -111,7 +111,7 @@ const BlogPage = (props) => {
     //         </ListItem>
     //       ))
     //     }
-    //   </React.Fragment>
+    //   </>
     // );
     setTimeout(() => {
       render(<Comp />, document.getElementById(`${outlineListId}-big`));
