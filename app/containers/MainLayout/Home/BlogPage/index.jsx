@@ -31,7 +31,7 @@ import {
   makeSelectIsBlogListFetching,
 } from 'containers/MainLayout/Home/BlogList/selectors';
 
-import hljs from 'highlight.js/lib/highlight';
+import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
 import python from 'highlight.js/lib/languages/python';
 
@@ -128,6 +128,7 @@ const BlogPage = (props) => {
   }, [url]);
 
 
+  console.log('URL', URL);
   return (
     <>
       <div className="content-center-page blog-page">
@@ -186,7 +187,10 @@ const BlogPage = (props) => {
           </Button>
           <Drawer dismissible open={outlineDrawer}>
             <div className="nav-big-outline__heading">
-              <div className="nav-big-outline__heading-text"><span>Outline</span></div>
+              <div className="nav-big-outline__heading-text">
+                <span>Outline</span>
+              </div>
+
               <div className="nav-big-outline__heading-icon">
                 <Icon
                   icon="clear"

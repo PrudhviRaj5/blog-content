@@ -119,7 +119,7 @@ const ContactMe = () => {
             children: 'This field is required',
           }}
         />
-        <div className="contact-me-submit">
+        {/* <div className="contact-me-submit">
           <Button
             rounded
             icon="touch_app"
@@ -127,7 +127,16 @@ const ContactMe = () => {
           >
             Submit
           </Button>
-        </div>
+        </div> */}
+      </div>
+      <div className="contact-me-submit">
+        <Button
+          rounded
+          icon="touch_app"
+          onClick={() => handleSubmit()}
+        >
+          Submit
+        </Button>
       </div>
     </div>
   );

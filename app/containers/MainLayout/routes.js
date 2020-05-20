@@ -3,7 +3,7 @@ import About from 'containers/MainLayout/About';
 import Archives from 'containers/MainLayout/Archives';
 import ContactMe from 'containers/MainLayout/ContactMe';
 
-import SomeLogo from 'assets/images/zylo-logo.svg';
+import SomeLogo from 'assets/images/personal-logo.png';
 
 export default {
   leftLink: {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Button, ButtonIcon } from '@rmwc/button';
+import { Button } from '@rmwc/button';
 
 import './CustomButton.scss';
 
@@ -30,13 +30,11 @@ const CustomButton = (props) => {
     <Button
       raised
       className={cx(clName)}
+      icon={icon}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...rest}
     >
-      {
-        icon ? <ButtonIcon icon={icon} /> : null
-      }
-      { children }
+      {children}
     </Button>
   );
 };
