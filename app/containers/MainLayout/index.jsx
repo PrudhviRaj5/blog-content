@@ -21,7 +21,7 @@ import TopNavBar from 'components/Material/TopNavBar';
 import topNavRoutes from './routes';
 import './main-layout.scss';
 
-const ZyloLogo = () => (
+const NavLogo = () => (
   <a
     href={topNavRoutes.leftLink.path}
     className="top-nav-logo"
@@ -65,10 +65,9 @@ const TopNavLayout = (props) => {
 
   return (
     <div className="main__frame">
-
       <TopNavBar
         activeTab={activeTab}
-        leftLogo={ZyloLogo}
+        leftLogo={NavLogo}
         centerLinks={topNavRoutes.centerLinks}
         updateActiveTab={updateActiveTab}
         toggleDrawer={toggleDrawer}
@@ -82,40 +81,35 @@ const TopNavLayout = (props) => {
       >
         <DrawerContent>
           <List>
-            {
-              topNavRoutes.centerLinks.map((eachLink, i) => (
-                <ListItem
-                  key={eachLink.key}
-                  tag={Link}
-                  to={eachLink.path}
-                  activated={activeTab === i}
-                  onClick={() => updateActiveTab(i)}
-                >
-                  <ListItemGraphic icon={eachLink.icon} />
-                  {eachLink.name}
-                </ListItem>
-              ))
-            }
+            {topNavRoutes.centerLinks.map((eachLink, i) => (
+              <ListItem
+                key={eachLink.key}
+                tag={Link}
+                to={eachLink.path}
+                activated={activeTab === i}
+                onClick={() => updateActiveTab(i)}
+              >
+                <ListItemGraphic icon={eachLink.icon} />
+                {eachLink.name}
+              </ListItem>
+            ))}
           </List>
         </DrawerContent>
       </Drawer>
 
       <div className="main__body">
         <Switch>
-          {
-            topNavRoutes.centerLinks.map((eachLink) => (
-              <Route
-                key={eachLink.key}
-                path={eachLink.path}
-                component={eachLink.component}
-                exact={eachLink.exact}
-              />
-            ))
-          }
+          {topNavRoutes.centerLinks.map((eachLink) => (
+            <Route
+              key={eachLink.key}
+              path={eachLink.path}
+              component={eachLink.component}
+              exact={eachLink.exact}
+            />
+          ))}
           <Redirect to="/home" />
         </Switch>
       </div>
-
     </div>
   );
 };
